@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import styles from './Footer.module.css';
 import {
   Facebook,
@@ -10,6 +11,19 @@ import {
 } from 'lucide-react';
 
 export default function Footer() {
+    const [showScroll, setShowScroll] = useState(false);
+
+
+  useEffect(() => {
+    const onScroll = () => {
+      setShowScroll(window.scrollY > 200); // show after 200px scroll
+    };
+
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+
   return (
     <footer className={styles.footer}>
       {/* TOP */}
@@ -17,8 +31,12 @@ export default function Footer() {
         {/* LEFT IMAGE AREA */}
         <div className={styles.left}>
           <div className={styles.brand}>
-            <span className={styles.logo}>Minicom</span>
-          </div>
+                      <img
+                          src="/LOGO.svg"
+                          alt="BirdFire Logo"
+                          className={styles.logo}
+                      />
+                  </div>
 
           <p className={styles.desc}>
             At Minicom, we bring style, comfort, and quality to your home with
@@ -83,19 +101,22 @@ export default function Footer() {
       <div className={styles.bottom}>
         <p>© 2025 NOVA-CREATIVE. ALL RIGHTS RESERVED.</p>
 
-        <div className={styles.payments}>
+        {/* <div className={styles.payments}>
           <img src="/paypal.png" />
           <img src="/mastercard.png" />
           <img src="/applepay.png" />
           <img src="/visa.png" />
           <img src="/amex.png" />
-        </div>
+        </div> */}
       </div>
 
       {/* SCROLL TOP */}
       <button
-        className={styles.scrollTop}
+        className={`${styles.scrollTop} ${
+          showScroll ? styles.visible : ''
+        }`}
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Scroll to top"
       >
         <ArrowUp size={18} />
       </button>

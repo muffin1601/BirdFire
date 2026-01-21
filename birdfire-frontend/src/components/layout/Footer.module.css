@@ -27,7 +27,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* adjust opacity */
+  background: rgba(0, 0, 0, 0.8); 
   z-index: 0;
 }
 
@@ -37,11 +37,16 @@
   z-index: 1;
 }
 
-.logo {
-  font-size: 20px;
-  font-weight: 700;
+.brand {
   margin-bottom: 20px;
 }
+
+.logo {
+  width: 140px;          /* adjust if needed */
+  height: auto;
+  display: block;
+}
+
 
 .desc {
   font-size: 13px;
@@ -151,19 +156,45 @@
   margin-left: 10px;
 }
 
-/* SCROLL TOP */
 .scrollTop {
   position: fixed;
   right: 24px;
   bottom: 24px;
+
   width: 44px;
   height: 44px;
   border-radius: 50%;
+
   background: #fff;
   color: #000;
-  border: none;
+  border: 1px solid #f1b123;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   cursor: pointer;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+
+  transition: all 0.3s ease;
+  z-index: 999;
 }
+
+/* WHEN VISIBLE */
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scrollTop:hover {
+  background: #111;
+  color: #fff;
+}
+
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
