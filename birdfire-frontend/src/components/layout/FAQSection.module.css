@@ -1,0 +1,142 @@
+/* WRAPPER */
+.wrapper {
+  padding: 100px 0;
+  background: #fafafa;
+  position: relative;
+  
+}
+
+/* BACKGROUND IMAGE PLACEHOLDER */
+.wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/faqbg.jpg') left bottom no-repeat;
+  background-size: contain;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+/* LEFT */
+.left {
+  padding-right: 40px;
+}
+
+.heading {
+  font-size: 26px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.description {
+  font-size: 14px;
+  
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.actionItem svg {
+  background: #000;
+  color: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+/* RIGHT */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* FAQ ITEM */
+.faqItem {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px 26px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.faqItem:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.icon {
+  transition: transform 0.3s ease;
+}
+
+.active .icon {
+  transform: rotate(180deg);
+}
+
+/* ANSWER */
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.active .answer {
+  max-height: 300px;
+}
+
+.answer p {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .wrapper::before {
+    display: none;
+  }
+}

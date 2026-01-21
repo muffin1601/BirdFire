@@ -1,0 +1,238 @@
+/* ================= WRAPPER ================= */
+
+.wrapper {
+  padding: 60px 0;
+  background: #fff;
+  max-width: 87%;
+  margin: 0 auto;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding: 0 12px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+.active {
+  background: #000;
+}
+
+/* ================= SLIDER ================= */
+
+.viewport {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slide {
+  flex: 0 0 25%;
+  padding: 0 12px;
+}
+
+/* ================= CARD ================= */
+
+.card {
+  text-align: left;
+  cursor: pointer;
+}
+
+/* ================= IMAGE ================= */
+
+.imageWrap {
+  background: #f6f6f6;
+  border-radius: 16px;
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primaryImage,
+.secondaryImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.secondaryImage {
+  position: absolute;
+  opacity: 0;
+}
+
+.card:hover .secondaryImage {
+  opacity: 1;
+}
+
+.card:hover .primaryImage {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+/* ================= BADGE ================= */
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.sale { background: #e53935; }
+.new { background: #2e7d32; }
+.hot { background: #ff9800; }
+
+/* ================= HOVER ICONS ================= */
+
+.hoverIcons {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.3s ease;
+}
+
+.card:hover .hoverIcons {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.iconBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.iconBtn:hover {
+  background: #f1b123;
+  color: #000000;
+}
+
+/* ================= INFO ================= */
+
+.stars {
+  color: #cfcfcf;
+  font-size: 14px;
+  margin: 12px 0 4px;
+}
+
+.productTitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #000;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 15px;
+  color: #000;
+}
+
+/* ADD TO CART BUTTON */
+
+.cartBtn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+
+  background: #000;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 0.3s ease;
+}
+
+/* Show on hover */
+.card:hover .cartBtn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cartBtn:hover {
+  background: #f1b123;
+  color: #000000;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .slide {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    flex: 0 0 100%;
+  }
+}
