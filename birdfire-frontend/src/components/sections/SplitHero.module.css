@@ -1,23 +1,72 @@
+
 .hero {
-  position: fixed;
+position: fixed;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   background: #000;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  padding: 6% 3%;
 }
 
-.panels {
+/* LEFT */
+.left {
+  width: 38%;
+  padding: 90px 70px;
   display: flex;
-  width: 100%;
-  height: 100vh;
+  align-items: center;
+  color: #fff;
+}
+
+.text {
+  max-width: 520px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.text h1 {
+  font-size: 3.8rem;
+  line-height: 1.1;
+  margin: 16px 0;
+}
+
+.text p {
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 26px;
+  font-weight: 600;
+  color: #000;
+  background: #f4c430;
+  padding: 14px 26px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+/* RIGHT */
+.panels {
+  width: 62%;
+  display: flex;
+  gap: 16px;
+  padding: 30px;
 }
 
 .panel {
-  position: relative;
   flex: 1;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: filter 0.6s ease;
+  transition: filter 0.5s ease;
 }
 
 .panel img {
@@ -26,66 +75,15 @@
   object-fit: cover;
 }
 
-/* dim inactive panels like video */
 .panel:not(.active) {
-  filter: brightness(0.75);
+  filter: brightness(0.45);
+}
+.panel.active {
+  filter: brightness(1);
 }
 
-/* overlay ONLY on active panel */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.65),
-    rgba(0, 0, 0, 0.2),
-    transparent
-  );
-  display: flex;
-  align-items: flex-end;
-}
-
-.content {
-  padding: 90px 80px;
-  color: #fff;
-  max-width: 700px;
-}
-
-.eyebrow {
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: 0.85;
-  display: block;
-  margin-bottom: 14px;
-}
-
-.content h1 {
-  font-size: 5.4rem;
-  line-height: 1.05;
-  margin: 0;
-}
-
-.content p {
-  margin-top: 18px;
-  max-width: 600px;
-  opacity: 0.9;
-  line-height: 1.7;
-}
-
-.content a {
-  margin-top: 28px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  color: white;
-}
-
-/* page scrolls over hero */
 :global(.page-content) {
-  margin-top: 100vh;
+  margin-top: 80vh;
   position: relative;
   z-index: 2;
   background: #fff;
