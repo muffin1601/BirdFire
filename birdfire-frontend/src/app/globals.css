@@ -3,14 +3,14 @@
 :root {
   --color-black: #000000;
   --color-white: #ffffff;
-  --color-accent: #f1b123;
+  --color-accent: #e08b3b;
 
   --color-title: #ffffff;
   --color-text: #ffffff;
 
-  --color-button: #f1b123;
+  --color-button: #e08b3b;
   --color-button-text: #000000;
-  --color-button-border: #f1b123;
+  --color-button-border: #e08b3b;
   --color-button-hover: #000000;
   --color-button-text-hover: #ffffff;
   --color-button-border-hover: #000000;
@@ -95,7 +95,7 @@ a {
   width: 220%;
   height: 320%;
 
-  background: #f1b123;
+  background: #e08b3b;
   border-radius: 50%;
 
   left: -60%;

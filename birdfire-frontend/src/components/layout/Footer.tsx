@@ -32,7 +32,7 @@ export default function Footer() {
         <div className={styles.left}>
           <div className={styles.brand}>
                       <img
-                          src="/LOGO.svg"
+                          src="/LOGO-W.png"
                           alt="BirdFire Logo"
                           className={styles.logo}
                       />
