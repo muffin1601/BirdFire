@@ -99,7 +99,7 @@ export default function Footer() {
 
       {/* BOTTOM */}
       <div className={styles.bottom}>
-        <p>© 2025 NOVA-CREATIVE. ALL RIGHTS RESERVED.</p>
+        <p>© 2026 BIRDFIRE. ALL RIGHTS RESERVED.</p>
 
         {/* <div className={styles.payments}>
           <img src="/paypal.png" />
