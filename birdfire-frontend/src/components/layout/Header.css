@@ -121,6 +121,18 @@
   
 }
 
+.site-header.scrolled .mega-menu {
+  padding-top: 25px;
+  
+}
+
+.site-header.scrolled .mega-menu-2 {
+ 
+ background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  
+}
+
 .mega-menu-2 {
   display: flex;
   justify-content: center;
