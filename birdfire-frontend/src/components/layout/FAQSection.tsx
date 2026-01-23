@@ -11,24 +11,24 @@ import styles from './FAQSection.module.css';
 
 const faqs = [
   {
-    question: 'WHAT SHIPPING METHODS ARE AVAILABLE?',
+    question: 'WHAT SHIPPING METHODS DOES BIRDFIRE OFFER?',
     answer:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra cursus eleifend. Maecenas sit amet libero nibh. Donec blandit arcu pharetra, venenatis mi quis, maximus lacus.',
+      'Birdfire partners with premium logistics providers to ensure secure and careful delivery of our luxury furniture. Shipping methods vary based on product type, size, and destination to guarantee the highest level of protection.',
   },
   {
-    question: 'HOW LONG WILL IT TAKE TO GET MY PACKAGE?',
+    question: 'HOW LONG WILL DELIVERY TAKE?',
     answer:
-      'Orders are usually processed within 1–2 business days. Delivery time depends on your location and chosen shipping method.',
+      'Orders are typically processed within 1–2 business days. Delivery timelines depend on your location and the nature of the product, with most Birdfire orders arriving within 7–14 business days.',
   },
   {
-    question: 'WHERE ARE YOUR PRODUCTS SENT FROM?',
+    question: 'WHERE ARE BIRDFIRE PRODUCTS SHIPPED FROM?',
     answer:
-      'All products are shipped from our central warehouse and partner fulfillment centers.',
+      'All Birdfire pieces are shipped from our curated warehouses and trusted manufacturing partners, ensuring consistent quality, craftsmanship, and safe handling.',
   },
   {
-    question: "WHY CAN'T I LOG INTO MY ACCOUNT?",
+    question: "WHY CAN’T I ACCESS MY BIRDFIRE ACCOUNT?",
     answer:
-      'Please ensure your credentials are correct or reset your password using the forgot password option.',
+      'Please confirm that your login details are correct. If you’ve forgotten your password, use the “Forgot Password” option to reset it, or contact Birdfire Customer Care for personalized assistance.',
   },
 ];
 

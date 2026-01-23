@@ -7,30 +7,31 @@ import gsap from "gsap";
 
 const data = [
   {
-    eyebrow: "TIMELESS ELEGANCE",
-    title: "SCANDINAVIAN BEDROOM SIMPLICITY & SERENITY",
+    eyebrow: "AMBIENT LIGHTING",
+    title: "DESIGNER LIGHTING ACCESSORIES FOR ELEGANT SPACES",
     desc:
-      "Create a peaceful retreat with Scandinavian-inspired bedroom furniture. Clean lines, natural textures, and cozy aesthetics bring harmony and warmth to your space.",
+      "Enhance your interiors with our curated lighting accessories—crafted to create warm ambience, highlight architectural details, and elevate modern living spaces.",
     image:
-      "https://nov-minicom.myshopify.com/cdn/shop/files/home2-accordion-1.jpg",
+      "https://www.gandiablasco.com/wp-content/uploads/2025/10/aria-collection-grid-1.jpg",
   },
   {
-    eyebrow: "NATURALLY CRAFTED",
-    title: "WOODEN ARMCHAIRS FOR EVERY CORNER",
+    eyebrow: "RELAXED LUXURY",
+    title: "LOUNGE CHAIRS DESIGNED FOR COMFORT & STYLE",
     desc:
-      "Bring warmth and character to your space with our beautifully crafted wooden armchairs—perfectly blending comfort, durability, and timeless design.",
+      "Discover beautifully designed lounge chairs that blend ergonomic comfort with refined aesthetics—perfect for living rooms, patios, and statement corners.",
     image:
-      "https://nov-minicom.myshopify.com/cdn/shop/files/home2-accordion-2.jpg",
+      "https://www.gandiablasco.com/wp-content/uploads/2023/04/lademadera-collection-grid.jpg",
   },
   {
-    eyebrow: "PLANT POTS",
-    title: "DECORATIVE PLANT POTS FOR MODERN SPACES",
+    eyebrow: "DECOR ACCENTS",
+    title: "DECORATIVE PLANT POTS FOR MODERN INTERIORS",
     desc:
-      "Elevate your greenery with our curated plant pots—designed to complement any room with natural charm and contemporary aesthetics.",
+      "Add a touch of nature to your space with decorative plant pots—thoughtfully designed to complement contemporary interiors and outdoor settings.",
     image:
-      "https://nov-minicom.myshopify.com/cdn/shop/files/home2-accordion-3.jpg",
+      "https://www.ethimo.com/assets/images/collections/xSEEDS_800X600.png.pagespeed.ic.aqW4vQix1Z.webp",
   },
 ];
+
 
 
 export default function SplitHero() {

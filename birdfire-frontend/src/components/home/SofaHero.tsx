@@ -22,7 +22,7 @@ export default function SofaHero() {
 
       <div className={styles.imageWrap}>
         <img
-          src="https://nov-minicom.myshopify.com/cdn/shop/files/home4-sofa.png?v=1752744309&width=1728"
+          src="/sofa.png"
           alt="Sofa"
           className={styles.sofa}
         />

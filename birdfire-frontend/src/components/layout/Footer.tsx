@@ -39,9 +39,7 @@ export default function Footer() {
                   </div>
 
           <p className={styles.desc}>
-            At Minicom, we bring style, comfort, and quality to your home with
-            carefully curated furniture collections. Designed for modern living,
-            our pieces blend functionality with timeless aesthetics.
+            At BirdFire, we redefine modern interiors with furniture that blends bold design, premium comfort, and lasting quality. Our curated collections are crafted to complement contemporary lifestyles with style and purpose.
           </p>
 
           <div className={styles.socials}>
