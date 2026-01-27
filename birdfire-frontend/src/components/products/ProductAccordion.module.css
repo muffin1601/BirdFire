@@ -1,0 +1,50 @@
+.accordion {
+  max-width: 1200px;
+  margin: 40px auto 80px;
+  padding: 0 40px;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Tabs row */
+.tabs {
+  display: flex;
+  gap: 100px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* Tab button */
+.tab {
+  background: none;
+  border: none;
+  padding: 16px 0;
+  cursor: pointer;
+font-family: "DM Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+  position: relative;
+}
+
+
+.active {
+  color: #f5b700;
+}
+
+/* Content area */
+.content {
+  max-width: 920px;
+  padding-top: 24px;
+
+  font-size: 14px;
+  line-height: 1.8;
+  color: #666;
+}
+
+/* List styling */
+.content ul {
+  padding-left: 18px;
+}
+
+.content li {
+  margin-bottom: 10px;
+}

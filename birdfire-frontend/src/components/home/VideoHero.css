@@ -69,12 +69,3 @@
   margin-top: 36px;
 }
 
-.page-content {
-  margin-top: 100vh;
-  background: #ffffff;
-  border-radius: 40px 40px 0 0;
-  position: relative;
-  z-index: 2;
-  min-height: 200vh;
-}
-

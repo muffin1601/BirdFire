@@ -44,7 +44,7 @@ body {
   font-size: 1.6rem;
   line-height: 1.6;
   color: var(--color-text);
-  background: var(--color-black);
+  background: var(--color-white);
   overflow-x: hidden;
 }
 
@@ -160,5 +160,23 @@ h5,
 h6 {
   margin: 0;
   font-weight: 700;
-  color: var(--color-title);
+  color: #000000;
+}
+
+.page-content-2 {
+  margin-top: 42vh;
+  background: #ffffff;
+  /* border-radius: 40px 40px 0 0; */
+  position: relative;
+  z-index: 2;
+  min-height: 200vh;
+}
+
+.page-content {
+  margin-top: 100vh;
+  background: #ffffff;
+  /* border-radius: 40px 40px 0 0; */
+  position: relative;
+  z-index: 2;
+  min-height: 200vh;
 }

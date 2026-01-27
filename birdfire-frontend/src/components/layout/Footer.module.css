@@ -44,7 +44,7 @@
 }
 
 .logo {
-  width: 140px;          /* adjust if needed */
+  width: 140px;          
   height: auto;
   display: block;
 }
@@ -76,7 +76,7 @@
 }
 
 .socials a:hover {
-  background: #f1b123;
+  background: #e08b3b;
   color: #000000;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .subscribe button:hover {
-  background: #f1b123;
+  background: #e08b3b;
   color: #000000;
 }
 
@@ -171,7 +171,7 @@
 
   background: #fff;
   color: #000;
-  border: 1px solid #f1b123;
+  border: 1px solid #e08b3b;
 
   display: flex;
   align-items: center;
