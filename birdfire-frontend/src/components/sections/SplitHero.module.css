@@ -22,6 +22,7 @@ position: fixed;
 
 .text {
   max-width: 520px;
+  color: #fff;
 }
 
 .eyebrow {
@@ -34,6 +35,7 @@ position: fixed;
 .text h1 {
   font-size: 3.8rem;
   line-height: 1.1;
+  color: #fff;
   margin: 16px 0;
 }
 
