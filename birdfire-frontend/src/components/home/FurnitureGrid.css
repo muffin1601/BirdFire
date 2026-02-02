@@ -146,7 +146,7 @@
   left: -40%;
   bottom: -180%;
 
-  background: #e08b3b;
+  background: #ec9d35;
   border-radius: 50%;
   z-index: 2;
 
@@ -202,3 +202,46 @@
   transform: rotate(0deg) translateX(4px);
 }
 
+/* split layout */
+.card-split {
+  display: flex;
+  height: 100%;
+}
+
+/* left image */
+.card-split-image {
+  flex: 1;
+}
+
+.card-split-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.card-split-content {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #f6f6f6; 
+}
+
+
+.card-split-content .card-arrow {
+  align-self: flex-end;
+}
+
+
+.card-split-content .card-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+
+.card-split-content .card-title {
+  font-size: 26px;
+  line-height: 1.2;
+}

@@ -13,26 +13,29 @@ export default function FurnitureGrid() {
         <div className="left-col">
 
           {/* TOP LARGE CARD */}
-          <div className="card card-large">
-            <img src="https://www.gandiablasco.com/wp-content/uploads/2020/12/onde-lounge-chair-gallery-horizontal-1-1.jpg" />
+          <div className="card card-large card-split">
 
-            {/* <div className="card-content">
-              <span className="card-eyebrow">
-                STEP TO BUY – SIMPLE & HASSLE-FREE
-              </span>
-              <h3 className="card-title">
-                Elegant Living <br /> Lounge Chairs
-              </h3>
-            </div> */}
+  {/* LEFT : IMAGE */}
+  <div className="card-split-image">
+    <img src="https://www.gandiablasco.com/wp-content/uploads/2020/12/onde-lounge-chair-gallery-horizontal-1-1.jpg" />
+  </div>
 
-            {/* <Link href="#" className="card-arrow">
-              <i className="zmdi zmdi-long-arrow-right"></i>
-            </Link> */}
-            <Link href="#" className="card-arrow">
-              <ArrowRight size={20} />
-            </Link>
-            
-          </div>
+  {/* RIGHT : CONTENT */}
+  <div className="card-split-content">
+    <span className="card-eyebrow">
+      STEP TO BUY – SIMPLE & HASSLE-FREE
+    </span>
+
+    <h3 className="card-title">
+      Elegant Living <br /> Lounge Chairs
+    </h3>
+
+    <Link href="#" className="card-arrow">
+      <ArrowRight size={20} />
+    </Link>
+  </div>
+
+</div>
 
           {/* BOTTOM SMALL ROW */}
           <div className="small-row">
