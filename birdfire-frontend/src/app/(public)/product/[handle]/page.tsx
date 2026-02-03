@@ -36,10 +36,10 @@ export default async function Page({ params }: PageProps) {
     <>
       <Header />
       <ProductPage product={product} />
-      <ProductAccordion  />
+      <ProductAccordion />
       <CategoryPillMarquee />
-              <FeaturesSection />
-              <FeaturedProductsSlider />
+      <FeaturesSection />
+      <FeaturedProductsSlider />
       <Footer />
     </>
   )

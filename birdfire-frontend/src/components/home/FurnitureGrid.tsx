@@ -12,35 +12,18 @@ export default function FurnitureGrid() {
         {/* LEFT COLUMN */}
         <div className="left-col">
 
-          {/* TOP LARGE CARD */}
-          <div className="card card-large card-split">
 
-  {/* LEFT : IMAGE */}
-  <div className="card-split-image">
-    <img src="https://www.gandiablasco.com/wp-content/uploads/2020/12/onde-lounge-chair-gallery-horizontal-1-1.jpg" />
-  </div>
-
-  {/* RIGHT : CONTENT */}
-  <div className="card-split-content">
-    <span className="card-eyebrow">
-      STEP TO BUY – SIMPLE & HASSLE-FREE
-    </span>
-
-    <h3 className="card-title">
-      Elegant Living <br /> Lounge Chairs
-    </h3>
-
-    <Link href="#" className="card-arrow">
-      <ArrowRight size={20} />
-    </Link>
-  </div>
-
-</div>
-
-          {/* BOTTOM SMALL ROW */}
           <div className="small-row">
-            <div className="card card-small">
-              <img src="https://www.ethimo.com/assets/images/collections/xPatio_800x6000.jpg.pagespeed.ic.ct6QVxyHqY.webp" />
+            <div className="card card-small card-content-only">
+
+              <div className="card-content">
+                <span className="card-eyebrow">DESIGN</span>
+                <h3 className="card-title">Allaperto Series</h3>
+              </div>
+
+              <Link href="#" className="card-arrow">
+                <ArrowRight size={16} />
+              </Link>
             </div>
 
             <div className="card card-small">
@@ -48,12 +31,45 @@ export default function FurnitureGrid() {
             </div>
           </div>
 
+          {/* BOTTOM SMALL ROW */}
+          <div className="small-row">
+            <div className="card card-small">
+              <img src="https://www.ethimo.com/assets/images/collections/xPatio_800x6000.jpg.pagespeed.ic.ct6QVxyHqY.webp" />
+            </div>
+
+            <div className="card card-small card-content-only">
+
+
+              <div className="card-content">
+                <span className="card-eyebrow">COLLECTION</span>
+                <h3 className="card-title">Outdoor Living</h3>
+              </div>
+
+              <Link href="#" className="card-arrow">
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
         </div>
 
         {/* RIGHT COLUMN */}
         <div className="right-col">
+
+          <div className="card card-small card-content-only">
+
+            <div className="card-content">
+              <span className="card-eyebrow">OUTDOOR</span>
+              <h3 className="card-title">Patio Collection</h3>
+            </div>
+
+            <Link href="#" className="card-arrow">
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+
           <div className="card card-tall">
-            <img src="https://www.gandiablasco.com/wp-content/uploads/2020/11/chill-collection-grid.jpg" />
+            <img src="https://www.ethimo.com/assets/images/homepage/xSito_Eivissa.jpg,qv=5.pagespeed.ic.SLbuANk_zL.webp" />
           </div>
         </div>
 

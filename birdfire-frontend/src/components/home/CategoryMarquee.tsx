@@ -1,37 +1,50 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import styles from "./CategoryMarquee.module.css";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import styles from "./CategoryMarquee.module.css";
+import { supabase } from "@/lib/supabaseClient";
 
 interface Category {
-  title: string;
-  image: string;
-  link: string;
+  id: string;
+  name: string;
+  slug: string;
+  image_url: string;
+  image_alt: string | null;
 }
-
-const categories: Category[] = [
-  { title: "Dining & Bar Chairs", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/caladio/01-stills/DF402050239IDCALADIOArmchair-incl-seat-cushionteakkapok.webp", link: "#" },
-  { title: "Tables", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/cirql-nu/01-Stills/Bistro-table/DFH031702190317.webp", link: "#" },
-  { title: "Lounging", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/MDEAR/01-Stills/dedon-mdear-left-corner-modulejpg.webp", link: "#" },
-  { title: "Lounge Chairs", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/MDEAR/02-measurements/DHR02380205.webp", link: "#" },
-  { title: "Beach Chairs", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/caladio/01-stills/DF402050239IDCALADIOArmchair-incl-seat-cushionteakkapok.webp", link: "#" },
-  { title: "Iconics", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/cirql-nu/01-Stills/Bistro-table/DFH031702190317.webp", link: "#" },
-  { title: "Side Tables", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/MDEAR/01-Stills/dedon-mdear-left-corner-modulejpg.webp", link: "#" },
-  { title: "Lighting Accessories", image: "https://www.dedon.de/-/media/product-catalog/products/accessories/scoora/01-kollektionsbilder/DEG03170235.webp", link: "#" },
-  { title: "Accessories", image: "https://www.dedon.de/-/media/product-catalog/products/furnitures/caladio/01-stills/DF402050239IDCALADIOArmchair-incl-seat-cushionteakkapok.webp", link: "#" },
-];
 
 export default function CategoryMarquee() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const scrollLeft = () => {
-    trackRef.current?.scrollBy({ left: -320, behavior: "smooth" });
-  };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data, error } = await supabase
+        .from("categories")
+        .select("id, name, slug, image_url, image_alt")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true });
 
-  const scrollRight = () => {
-    trackRef.current?.scrollBy({ left: 320, behavior: "smooth" });
+      if (error) {
+        console.error("Supabase error:", error);
+      }
+
+      if (data) setCategories(data);
+      setLoading(false);
+    };
+
+    fetchCategories();
+  }, []);
+
+  if (loading || !categories.length) return null;
+
+  const scroll = (direction: number) => {
+    trackRef.current?.scrollBy({
+      left: direction * 320,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -40,10 +53,10 @@ export default function CategoryMarquee() {
         <h2 className={styles.sectionTitle}>SHOP BY CATEGORY</h2>
 
         <div className={styles.navButtons}>
-          <button onClick={scrollLeft} className={styles.navBtn}>
+          <button className={styles.navBtn} onClick={() => scroll(-1)}>
             <ArrowLeft size={24} />
           </button>
-          <button onClick={scrollRight} className={`${styles.navBtn} ${styles.active}`}>
+          <button className={`${styles.navBtn} ${styles.active}`} onClick={() => scroll(1)}>
             <ArrowRight size={24} />
           </button>
         </div>
@@ -52,15 +65,18 @@ export default function CategoryMarquee() {
       <div ref={trackRef} className={styles.marqueeViewport}>
         <div className={styles.marqueeTrack}>
           {[...categories, ...categories].map((cat, index) => (
-            <div key={index} className={styles.categoryCard}>
+            <div key={`${cat.id}-${index}`} className={styles.categoryCard}>
               <div className={styles.cardImage}>
-                <img src={cat.image} alt={cat.title} />
+                <img src={cat.image_url} alt={cat.image_alt || cat.name} />
               </div>
 
               <div className={styles.cardFooter}>
-                <span className={styles.cardTitle}>{cat.title}</span>
+                <span className={styles.cardTitle}>{cat.name}</span>
 
-                <Link href={cat.link} className={styles.arrowButton}>
+                <Link
+                  href={`/category/products/${cat.slug}`}
+                  className={styles.arrowButton}
+                >
                   <ArrowRight size={20} />
                 </Link>
               </div>

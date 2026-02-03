@@ -22,7 +22,8 @@ export default function HomePage() {
       {/* <VideoHero /> */}
 
       <div className="page-content">
-       <CategoryMarquee /><FeaturesSection />
+       <CategoryMarquee />
+       <FeaturesSection />
         <FurnitureGrid />
         
         
