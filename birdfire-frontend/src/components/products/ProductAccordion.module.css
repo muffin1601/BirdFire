@@ -1,7 +1,7 @@
 .accordion {
-  max-width: 1200px;
+  max-width: 85%;
   margin: 40px auto 80px;
-  padding: 0 40px;
+  padding: 0 20px;
   font-family: "DM Sans", sans-serif;
 }
 

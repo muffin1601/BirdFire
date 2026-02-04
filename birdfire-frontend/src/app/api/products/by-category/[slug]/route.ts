@@ -25,10 +25,8 @@ export async function GET(
       name,
       slug,
       price,
-      compare_price,
       is_new,
       is_featured,
-      availability_status,
       primary_image_id,
       secondary_image_id,
       product_images (
@@ -41,29 +39,26 @@ export async function GET(
     .eq("is_active", true)
     .order("created_at", { ascending: false });
 
-  if (!products) {
-    return NextResponse.json([]);
-  }
+  const result =
+    products?.map((p) => {
+      const primary = p.product_images?.find(
+        (img: any) => img.id === p.primary_image_id
+      );
 
-  const result = products.map((p) => {
-    const primary = p.product_images?.find(
-      (img: any) => img.id === p.primary_image_id
-    );
+      const secondary = p.product_images?.find(
+        (img: any) => img.id === p.secondary_image_id
+      );
 
-    const secondary = p.product_images?.find(
-      (img: any) => img.id === p.secondary_image_id
-    );
-
-    return {
-      id: p.id,
-      handle: p.slug,
-      title: p.name,
-      price: Number(p.price),
-      featured_image: primary?.image_url ?? "",
-      secondary_image: secondary?.image_url ?? null,
-      badge: p.is_new ? "new" : p.is_featured ? "hot" : undefined,
-    };
-  });
+      return {
+        id: p.id,
+        handle: p.slug,
+        title: p.name,
+        price: Number(p.price),
+        featured_image: primary?.image_url ?? null,
+        secondary_image: secondary?.image_url ?? null,
+        badge: p.is_new ? "new" : p.is_featured ? "hot" : undefined,
+      };
+    }) ?? [];
 
   return NextResponse.json(result);
 }

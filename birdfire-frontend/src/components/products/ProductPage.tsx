@@ -1,113 +1,160 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, Heart } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Heart, Minus, Plus } from 'lucide-react'
 import styles from './ProductPage.module.css'
-import { Minus, Plus } from "lucide-react";
+
+interface ProductImage {
+  image_url: string
+  sort_order: number
+}
+
+interface Product {
+  name: string
+  short_description: string | null
+  description: string | null
+  price: number
+  compare_price: number | null
+  stock: number
+  rating_average: number | null
+  rating_count: number | null
+  product_images: ProductImage[]
+}
 
 interface Props {
-  product: any
+  product: Product
 }
 
 export default function ProductPage({ product }: Props) {
-  const variant = product.variants[0]
-
-  const images = [
-    product.featured_image,
-    product.secondary_image,
-  ].filter(Boolean) as string[]
+  /* ================= IMAGES (DB) ================= */
+  const images =
+    product.product_images
+      ?.slice()
+      .sort((a, b) => a.sort_order - b.sort_order)
+      .map(img => img.image_url) ?? []
 
   const [activeImage, setActiveImage] = useState(images[0])
+
+  /* ================= HARDCODED META ================= */
+  const vendor = 'Luxury Outdoor'
+  const category = 'Outdoor Furniture'
+  const tags = ['Premium', 'Outdoor', 'Designer']
+  const sku = 'SKU-0001'
+
+  /* ================= DERIVED VALUES ================= */
+  const rating = Math.round(product.rating_average ?? 0)
+  const reviewCount = product.rating_count ?? 0
+  const inStock = product.stock > 0
 
   return (
     <section className={styles.page}>
       <div className={styles.wrapper}>
-        {/* LEFT */}
 
+        {/* ================= LEFT / GALLERY ================= */}
         <div className={styles.gallery}>
           <div className={styles.breadcrumbs}>
             <a href="/">Home</a>
             <span>/</span>
-            {/* <a href={`/products?type=${product.product_type}`}>{product.product_type}</a>
-            <span>/</span> */}
-            <span>{product.title}</span>
+            <span>{product.name}</span>
           </div>
-          <div className={styles.mainImage}>
-            <img src={activeImage} alt={product.title} />
-
-            <button
-              className={styles.navLeft}
-              onClick={() =>
-                setActiveImage(
-                  images[
-                  (images.indexOf(activeImage) - 1 + images.length) %
-                  images.length
-                  ]
-                )
-              }
-            >
-              <ChevronLeft size={22} />
-            </button>
-
-            <button
-              className={styles.navRight}
-              onClick={() =>
-                setActiveImage(
-                  images[
-                  (images.indexOf(activeImage) + 1) % images.length
-                  ]
-                )
-              }
-            >
-              <ChevronRight size={22} />
-            </button>
-          </div>
-
-          <div className={styles.thumbs}>
+<div className={styles.imageSection}>
+  <div className={styles.thumbs}>
             {images.map(img => (
               <img
                 key={img}
                 src={img}
                 onClick={() => setActiveImage(img)}
-                className={
-                  activeImage === img ? styles.activeThumb : ''
-                }
+                className={activeImage === img ? styles.activeThumb : ''}
               />
             ))}
           </div>
+          <div className={styles.mainImage}>
+            <div className={styles.imageBox}>
+              {activeImage && (
+                <img src={activeImage} alt={product.name} />
+              )}
+            </div>
+
+            {images.length > 1 && (
+              <>
+                <button
+                  className={styles.navLeft}
+                  onClick={() =>
+                    setActiveImage(
+                      images[
+                      (images.indexOf(activeImage) - 1 + images.length) %
+                      images.length
+                      ]
+                    )
+                  }
+                >
+                  <ChevronLeft size={22} />
+                </button>
+
+                <button
+                  className={styles.navRight}
+                  onClick={() =>
+                    setActiveImage(
+                      images[
+                      (images.indexOf(activeImage) + 1) % images.length
+                      ]
+                    )
+                  }
+                >
+                  <ChevronRight size={22} />
+                </button>
+              </>
+            )}
+          </div>
+          </div>
         </div>
 
-        {/* RIGHT */}
+        {/* ================= RIGHT / DETAILS ================= */}
         <div className={styles.details}>
-          <h1 className={styles.title}>{product.title}</h1>
+          <h1 className={styles.title}>{product.name}</h1>
 
+          {/* RATING (DB) */}
           <div className={styles.rating}>
-            {'★'.repeat(Math.round(product.rating))}
-            {'☆'.repeat(5 - Math.round(product.rating))}
-            <span> ({product.review_count})</span>
+            {'★'.repeat(rating)}
+            {'☆'.repeat(5 - rating)}
+            <span> ({reviewCount})</span>
           </div>
 
+          {/* PRICE (DB) */}
           <div className={styles.price}>
             ${product.price.toLocaleString()}
           </div>
 
-          <p className={styles.desc}>{product.description}</p>
+          {/* {product.compare_price && (
+            <div className={styles.compare}>
+              ${product.compare_price.toLocaleString()}
+            </div>
+          )} */}
 
+          {/* DESCRIPTION (DB + fallback) */}
+          <p className={styles.desc}>
+            {product.short_description ||
+              'Premium outdoor furniture designed for modern living.'}
+          </p>
+
+          {/* STOCK (DERIVED) */}
           <div className={styles.stock}>
-            {variant.available ? (
+            {inStock ? (
               <span className={styles.in}>In stock</span>
             ) : (
               <span className={styles.out}>Out of stock</span>
             )}
           </div>
 
+          {/* META (HARDCODED) */}
           <ul className={styles.meta}>
-            <li><strong>SKU:</strong> {variant.sku}</li>
-            <li><strong>Vendor:</strong> {product.vendor}</li>
-            <li><strong>Category:</strong> {product.product_type}</li>
-            <li><strong>Tags:</strong> {product.tags.join(', ')}</li>
+            <li><strong>SKU:</strong> {sku}</li>
+            <li><strong>Vendor:</strong> {vendor}</li>
+            <li><strong>Category:</strong> {category}</li>
+            <li><strong>Tags:</strong> {tags.join(', ')}</li>
           </ul>
 
+          {/* ACTIONS (STATIC UI) */}
           <div className={styles.actionsWrapper}>
             <div className={styles.quantityRow}>
               <div className={styles.quantityRow2}>
@@ -126,10 +173,7 @@ export default function ProductPage({ product }: Props) {
                 </div>
               </div>
 
-
-
               <button className={styles.add}>ADD TO BAG</button>
-
               <button className={styles.wishlist}>
                 <Heart size={18} />
               </button>

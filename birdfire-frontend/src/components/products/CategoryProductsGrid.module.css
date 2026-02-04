@@ -11,7 +11,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 32px 24px;
 }
 
@@ -25,28 +25,33 @@
 /* ================= IMAGE ================= */
 
 .imageWrap {
-  background: #ffffff;
-  border-radius: 16px;
-  height: 260px;
   position: relative;
-  overflow: hidden;
+  height: 260px;
+  width: 100%;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 0px;
+  overflow: hidden;
+  background: #ffffff; /* subtle fallback */
 }
 
 .primaryImage,
 .secondaryImage {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  transform: translateZ(0);
   transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.primaryImage {
+  object-fit: contain;
 }
 
 .secondaryImage {
   position: absolute;
   opacity: 0;
+  object-fit: cover;
 }
 
 .card:hover .secondaryImage {
@@ -67,7 +72,8 @@
   font-size: 11px;
   font-weight: 600;
   padding: 4px 8px;
-  border-radius: 4px;
+  font-family: 'DM Sans', sans-serif;
+  border-radius: 0px;
   color: #fff;
 }
 
@@ -122,14 +128,35 @@
   font-size: 14px;
   font-weight: 500;
   color: #000;
+  text-transform: uppercase;
   line-height: 1.4;
 }
 
-.price {
-  font-weight: 700;
-  font-size: 15px;
-  color: #000;
+
+.priceWrap {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+
+
+.price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1;
+}
+
+
+.comparePrice {
+  font-size: 13px;
+  font-weight: 400;
+  color: #888;
+  text-decoration: line-through;
+  line-height: 1;
+}
+
 
 /* ADD TO CART */
 

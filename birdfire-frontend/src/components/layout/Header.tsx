@@ -6,15 +6,15 @@ import { Search, User, Heart, ShoppingBag } from "lucide-react"
 import "./Header.css"
 
 export const categories = [
-  { label: "Dining & Bar Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/lamp.svg", link: "/products/dining-and-bar-chairs" },
-  { label: "Tables", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/coffee-table.svg", link: "/products/tables" },
-  { label: "Lounging", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/potted-plant.svg", link: "/products/lounging" },
-  { label: "Lounge Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/armchair_beeb15d0-e4cd-4f7f-a928-00873880baed.svg", link: "/products/lounge-chairs" },
-  { label: "Beach Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/armchair_beeb15d0-e4cd-4f7f-a928-00873880baed.svg", link: "/products/beach-chairs" },
-  { label: "Iconics", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/potted-plant.svg", link: "/products/iconics" },
-  { label: "Side Tables", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/coffee-table.svg", link: "/products/side-tables" },
-  { label: "Lighting Accessories", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/lamp.svg", link: "/products/lighting-accessories" },
-  { label: "Accessories", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/shelf.svg", link: "/products/accessories" },
+  { label: "Dining & Bar Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/lamp.svg", link: "/category/products/dining-and-bar-chairs" },
+  { label: "Tables", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/coffee-table.svg", link: "/category/products/tables" },
+  { label: "Lounging", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/potted-plant.svg", link: "/category/products/lounging" },
+  { label: "Lounge Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/armchair_beeb15d0-e4cd-4f7f-a928-00873880baed.svg", link: "/category/products/lounge-chairs" },
+  { label: "Beach Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/armchair_beeb15d0-e4cd-4f7f-a928-00873880baed.svg", link: "/category/products/beach-chairs" },
+  { label: "Iconics", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/potted-plant.svg", link: "/category/products/iconics" },
+  { label: "Side Tables", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/coffee-table.svg", link: "/category/products/side-tables" },
+  { label: "Lighting Accessories", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/lamp.svg", link: "/category/products/lighting-accessories" },
+  { label: "Accessories", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/shelf.svg", link: "/category/products/accessories" },
 ]
 
 export default function Header() {
