@@ -75,8 +75,6 @@
   cursor: pointer;
 }
 
-/* ================= IMAGE ================= */
-
 .imageWrap {
   background: #ffffff;
   border-radius: 0px;
@@ -118,9 +116,6 @@
   transform: scale(1.05);
 }
 
-
-/* ================= BADGE ================= */
-
 .badge {
   position: absolute;
   top: 12px;
@@ -135,8 +130,6 @@
 .sale { background: #e53935; }
 .new { background: #2e7d32; }
 .hot { background: #e08b3b; }
-
-/* ================= HOVER ICONS ================= */
 
 .hoverIcons {
   position: absolute;

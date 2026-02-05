@@ -26,7 +26,7 @@ interface Props {
 }
 
 export default function ProductPage({ product }: Props) {
-  /* ================= IMAGES (DB) ================= */
+ 
   const images =
     product.product_images
       ?.slice()
@@ -35,13 +35,13 @@ export default function ProductPage({ product }: Props) {
 
   const [activeImage, setActiveImage] = useState(images[0])
 
-  /* ================= HARDCODED META ================= */
+  
   const vendor = 'Luxury Outdoor'
   const category = 'Outdoor Furniture'
   const tags = ['Premium', 'Outdoor', 'Designer']
   const sku = 'SKU-0001'
 
-  /* ================= DERIVED VALUES ================= */
+  
   const rating = Math.round(product.rating_average ?? 0)
   const reviewCount = product.rating_count ?? 0
   const inStock = product.stock > 0
@@ -50,7 +50,7 @@ export default function ProductPage({ product }: Props) {
     <section className={styles.page}>
       <div className={styles.wrapper}>
 
-        {/* ================= LEFT / GALLERY ================= */}
+   
         <div className={styles.gallery}>
           <div className={styles.breadcrumbs}>
             <a href="/">Home</a>
@@ -109,18 +109,17 @@ export default function ProductPage({ product }: Props) {
           </div>
         </div>
 
-        {/* ================= RIGHT / DETAILS ================= */}
+        
         <div className={styles.details}>
           <h1 className={styles.title}>{product.name}</h1>
 
-          {/* RATING (DB) */}
           <div className={styles.rating}>
             {'★'.repeat(rating)}
             {'☆'.repeat(5 - rating)}
             <span> ({reviewCount})</span>
           </div>
 
-          {/* PRICE (DB) */}
+          
           <div className={styles.price}>
             ${product.price.toLocaleString()}
           </div>
@@ -131,13 +130,13 @@ export default function ProductPage({ product }: Props) {
             </div>
           )} */}
 
-          {/* DESCRIPTION (DB + fallback) */}
+         
           <p className={styles.desc}>
             {product.short_description ||
               'Premium outdoor furniture designed for modern living.'}
           </p>
 
-          {/* STOCK (DERIVED) */}
+          
           <div className={styles.stock}>
             {inStock ? (
               <span className={styles.in}>In stock</span>
@@ -146,7 +145,7 @@ export default function ProductPage({ product }: Props) {
             )}
           </div>
 
-          {/* META (HARDCODED) */}
+      
           <ul className={styles.meta}>
             <li><strong>SKU:</strong> {sku}</li>
             <li><strong>Vendor:</strong> {vendor}</li>
@@ -154,7 +153,7 @@ export default function ProductPage({ product }: Props) {
             <li><strong>Tags:</strong> {tags.join(', ')}</li>
           </ul>
 
-          {/* ACTIONS (STATIC UI) */}
+         
           <div className={styles.actionsWrapper}>
             <div className={styles.quantityRow}>
               <div className={styles.quantityRow2}>

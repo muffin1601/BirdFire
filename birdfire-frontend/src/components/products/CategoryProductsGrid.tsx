@@ -29,7 +29,7 @@ interface Props {
 
 export default function CategoryProductsGrid({ products }: Props) {
 
-  console.log('CategoryProductsGrid products:', products)
+  // console.log('CategoryProductsGrid products:', products)
   return (
     <section className={styles.wrapper}>
       <div className={styles.grid}>
@@ -110,7 +110,7 @@ export default function CategoryProductsGrid({ products }: Props) {
                   </button>
                 </div>
 
-                {/* RATING (STATIC FOR NOW) */}
+                {/* RATING  */}
                 <div className={styles.stars}>★★★★☆</div>
 
                 <h4 className={styles.productTitle}>{p.name}</h4>

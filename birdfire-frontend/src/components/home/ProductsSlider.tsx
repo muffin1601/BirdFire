@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link'
 import { useEffect, useRef, useState } from "react";
 import { Heart, Eye, ShoppingBag } from "lucide-react";
 import styles from "./ProductsSlider.module.css";
@@ -118,6 +119,11 @@ export default function ProductsSlider() {
         >
           {products.map((p) => (
             <div key={p.id} className={styles.slide}>
+              <Link
+              key={p.id}
+              href={`/product/${p.slug}`}
+              className={styles.cardLink}
+              >
               <div className={styles.card}>
                 {/* IMAGE */}
                 <div className={styles.imageWrap}>
@@ -161,7 +167,9 @@ export default function ProductsSlider() {
                   ${p.price.toFixed(2)}
                 </span>
               </div>
+              </Link>
             </div>
+            
           ))}
         </div>
       </div>

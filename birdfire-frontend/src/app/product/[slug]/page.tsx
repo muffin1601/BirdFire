@@ -26,7 +26,7 @@ export default async function Page({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-console.log('[Product Page] slug:', slug)
+// console.log('[Product Page] slug:', slug)
   const { data: product } = await supabaseServer
     .from('products')
     .select(`
@@ -52,8 +52,8 @@ console.log('[Product Page] slug:', slug)
     .eq('is_active', true)
     .single()
 
-  console.log('[Product Page] product:', product)
-console.log('[Product Page] error:', Error)
+//   console.log('[Product Page] product:', product)
+// console.log('[Product Page] error:', Error)
 
   if (!product) return notFound()
 
