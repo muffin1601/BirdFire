@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import ProductsFilterBar from "@/components/products/ProductsFilterBar";
 import CategoryProductsGrid from "@/components/products/CategoryProductsGrid";
 import CategoryPillMarquee from "@/components/home/CategoryPillMarquee";
-import FeaturedProductsSlider from "@/components/home/ProductsSlider";
+import ProductsSlider from "@/components/home/ProductsSlider";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import { supabaseServer } from "@/lib/supabaseServer";
 
@@ -130,7 +130,7 @@ export default async function CategoryProductsPage({
         <CategoryProductsGrid products={products} />
         <CategoryPillMarquee />
         <FeaturesSection />
-        <FeaturedProductsSlider />
+        <ProductsSlider />
         <Footer />
       </div>
     </>

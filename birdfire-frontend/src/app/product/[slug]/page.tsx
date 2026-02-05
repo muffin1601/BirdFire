@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer'
 import ProductPage from '@/components/products/ProductPage'
 import CategoryPillMarquee from '@/components/home/CategoryPillMarquee'
 import FeaturesSection from '@/components/home/FeaturesSection'
-import FeaturedProductsSlider from '@/components/home/ProductsSlider'
+import ProductsSlider from '@/components/home/ProductsSlider'
 import { supabaseServer } from '@/lib/supabaseServer'
 import ProductAccordion from '@/components/products/ProductAccordion'
 
@@ -64,7 +64,7 @@ console.log('[Product Page] error:', Error)
       <ProductAccordion  />
       <CategoryPillMarquee />
       <FeaturesSection />
-      <FeaturedProductsSlider />
+      <ProductsSlider />
       <Footer />
     </>
   )

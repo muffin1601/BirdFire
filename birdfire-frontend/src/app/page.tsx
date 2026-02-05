@@ -1,6 +1,6 @@
 import CategoryMarquee from "@/components/home/CategoryMarquee"
 import CategoryPillMarquee from "@/components/home/CategoryPillMarquee"
-import FeaturedProductsSlider from "@/components/home/ProductsSlider"
+import ProductsSlider from "@/components/home/ProductsSlider"
 import FeaturesSection from "@/components/home/FeaturesSection"
 import FurnitureGrid from "@/components/home/FurnitureGrid"
 // import SofaHero from "@/components/home/SofaHero"
@@ -29,7 +29,7 @@ export default function HomePage() {
         
         {/* <SofaHero /> */}
         <CategoryPillMarquee />
-        <FeaturedProductsSlider  />
+        <ProductsSlider  />
         <FAQSection />
         <Footer />
         {/* <section style={{ height: "200vh" }}>

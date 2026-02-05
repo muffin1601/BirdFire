@@ -2,8 +2,11 @@ import "./globals.css"
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "BirdFire",
-  description: "BirdFire Furniture",
+  title: "BirdFire Furniture | Modern Furniture for Outdoor Living",
+  description: "Buy modern furniture online at BirdFire. Stylish, durable, and thoughtfully designed pieces for Outdoor Living.",
+   icons: {
+    icon: "/favicon.png",
+  },
 };
 
 
