@@ -162,6 +162,8 @@ export default function ProductsSlider() {
                 </div>
 
                 {/* INFO */}
+                <div className={styles.stars}>★★★★☆</div>
+
                 <h4 className={styles.productTitle}>{p.name}</h4>
                 <span className={styles.price}>
                   ${p.price.toFixed(2)}

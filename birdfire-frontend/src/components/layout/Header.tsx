@@ -41,7 +41,7 @@ export default function Header() {
               <li><Link href="/">Home</Link></li>
 
               <li className="nav-item has-mega">
-                <Link href="/collections">Collections</Link>
+                <Link href="#">Products</Link>
 
                 <div className="mega-menu">
                   <div className="mega-menu-2">
@@ -57,7 +57,7 @@ export default function Header() {
                 </div>
               </li>
 
-              <li><Link href="/products">Products</Link></li>
+              <li><Link href="/collections">Collections</Link></li>
               <li><Link href="/pages">About</Link></li>
               {/* <li><Link href="/blog">Blog</Link></li> */}
               <li><Link href="/contact">Contact</Link></li>
