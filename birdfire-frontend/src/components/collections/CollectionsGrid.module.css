@@ -1,0 +1,134 @@
+
+
+.wrapper {
+  max-width: 87%;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+
+
+
+.searchWrap {
+  margin-bottom: 50px;
+  max-width: 420px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #000;
+}
+
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px 32px;
+}
+
+
+
+.card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+
+
+.imageWrap {
+  height: 320px;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.card:hover .image {
+  transform: scale(1.06);
+}
+
+
+
+.textWrap {
+  margin-top: 18px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: 0.05em;
+}
+
+.subtitle {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #000;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover .cta {
+  color: #e08b3b;
+  border-color: #e08b3b;
+}
+
+
+
+.empty {
+  margin-top: 60px;
+  font-size: 14px;
+  color: #777;
+}
+
+
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .imageWrap {
+    height: 260px;
+  }
+}

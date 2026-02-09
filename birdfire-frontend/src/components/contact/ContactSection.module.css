@@ -1,0 +1,167 @@
+.wrapper {
+  max-width: 85%;
+  margin: 0 auto;
+  padding: 120px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 90px;
+  align-items: flex-start;
+}
+
+/* LEFT */
+
+.formWrap {
+  width: 100%;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #666;
+  max-width: 520px;
+}
+
+.form {
+  margin-top: 40px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 16px 18px;
+  font-family: "DM Sans";
+  font-size: 13px;
+  border: 1px solid #dcdcdc;
+  outline: none;
+}
+
+.form input {
+  margin-bottom: 22px;
+}
+
+.form textarea {
+  resize: none;
+  margin-bottom: 36px;
+}
+
+/* RIGHT */
+
+.info {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #000;
+}
+
+.info p {
+  margin-bottom: 18px;
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.socials a {
+  width: 32px;
+  height: 32px;
+  background: #ec9d35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 70px;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.btnSubmit {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 160px;
+  height: 52px;
+  padding: 20px 32px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  background: #ffffff;
+  color: #ffffff;
+  border-radius: 0px;
+  border: none;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.btnSubmit span {
+  position: relative;
+  z-index: 5;
+}
+
+.btnSubmit::before {
+  content: "";
+  position: absolute;
+  width: 220%;
+  height: 320%;
+  background: #ec9d35;
+  border-radius: 50%;
+  left: -60%;
+  bottom: -180%;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btnSubmit::after {
+  content: "";
+  position: absolute;
+  width: 220%;
+  height: 320%;
+  background: #000000;
+  border-radius: 50%;
+  color: #ffffff !important;
+  left: -60%;
+  bottom: -180%;
+  z-index: 1;
+  transform: translateY(-130%);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btnSubmit:hover::before {
+  transform: translateY(-100%);
+}
+
+.btnSubmit:hover::after {
+  transform: translateY(0);
+}
