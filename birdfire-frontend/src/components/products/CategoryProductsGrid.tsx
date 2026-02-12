@@ -119,11 +119,11 @@ export default function CategoryProductsGrid({ products }: Props) {
                 <div className={styles.priceWrap}>
                   {isOnSale && (
                     <span className={styles.comparePrice}>
-                      ${p.compare_price!.toLocaleString()}
+                      ₹{p.compare_price!.toLocaleString()}
                     </span>
                   )}
                   <span className={styles.price}>
-                    ${p.price.toLocaleString()}
+                    ₹{p.price.toLocaleString()}
                   </span>
                 </div>
               </div>

@@ -166,7 +166,7 @@ export default function ProductsSlider() {
 
                 <h4 className={styles.productTitle}>{p.name}</h4>
                 <span className={styles.price}>
-                  ${p.price.toFixed(2)}
+                  ₹{p.price.toFixed(2)}
                 </span>
               </div>
               </Link>

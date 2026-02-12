@@ -121,7 +121,7 @@ export default function ProductPage({ product }: Props) {
 
           
           <div className={styles.price}>
-            ${product.price.toLocaleString()}
+            ₹{product.price.toLocaleString()}
           </div>
 
           {/* {product.compare_price && (
