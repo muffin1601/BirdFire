@@ -106,7 +106,7 @@ export default function SplitHero() {
         </AnimatePresence>
       </div>
 
-      {/* RIGHT ACCORDION */}
+      
       <div
         className={styles.panels}
         onPointerDown={onPointerDown}

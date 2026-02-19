@@ -1,0 +1,33 @@
+.search-page {
+  max-width: 1400px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+.search-page h1 {
+  font-size: 28px;
+  margin-bottom: 32px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 28px;
+}
+
+.product-card {
+  text-decoration: none;
+  color: #000;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 12px;
+  background: #f5f5f5;
+}
+
+.price span {
+  margin-left: 8px;
+  text-decoration: line-through;
+  color: #999;
+}

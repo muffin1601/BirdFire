@@ -1,0 +1,202 @@
+.wrapper {
+  padding: 60px 0;
+  background: #fff;
+  max-width: 85%;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px 24px;
+  justify-content: center;
+}
+
+.card {
+  text-align: left;
+  cursor: pointer;
+}
+
+.imageWrap {
+  position: relative;
+  height: 260px;
+  width: 100%;
+  border-radius: 0px;
+  overflow: hidden;
+  background: #ffffff; 
+}
+
+.primaryImage,
+.secondaryImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateZ(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.primaryImage {
+  object-fit: contain;
+}
+
+.secondaryImage {
+  position: absolute;
+  opacity: 0;
+  object-fit: cover;
+}
+
+.card:hover .secondaryImage {
+  opacity: 1;
+}
+
+.card:hover .primaryImage {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  font-family: 'DM Sans', sans-serif;
+  border-radius: 0px;
+  color: #fff;
+}
+
+.sale { background: #e53935; }
+.new { background: #2e7d32; }
+.hot { background: #e08b3b; }
+
+
+.hoverIcons {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.3s ease;
+}
+
+.card:hover .hoverIcons {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.iconBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconBtn:hover {
+  background: #e08b3b;
+}
+
+.stars {
+  color: #cfcfcf;
+  font-size: 14px;
+  margin: 12px 0 4px;
+}
+
+.productTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.priceWrap {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+  line-height: 1;
+}
+
+.comparePrice {
+  font-size: 13px;
+  font-weight: 400;
+  color: #888;
+  text-decoration: line-through;
+  line-height: 1;
+}
+
+.cartBtn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+
+  width: 44px
+;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+
+  background: #000;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 0.3s ease;
+}
+
+.card:hover .cartBtn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cartBtn:hover {
+  background: #e08b3b;
+  color: #000;
+}
+
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

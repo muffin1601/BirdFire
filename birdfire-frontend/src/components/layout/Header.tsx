@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Search, User, Heart, ShoppingBag } from "lucide-react"
+import { Search, User, Heart, ShoppingBag, X } from "lucide-react"
 import "./Header.css"
 
 export const categories = [
@@ -19,6 +19,8 @@ export const categories = [
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [query, setQuery] = useState("")
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 120)
@@ -26,8 +28,57 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  useEffect(() => {
+    if (searchOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+  }, [searchOpen])
+
   return (
     <>
+      {searchOpen && (
+        <div
+          className="search-backdrop"
+          onClick={() => setSearchOpen(false)}
+        />
+      )}
+      <div className={`search-overlay ${searchOpen ? "open" : ""}`}>
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="SEARCH PRODUCTS"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && query.trim()) {
+                window.location.href = `/search?q=${encodeURIComponent(query)}`
+                setSearchOpen(false)
+              }
+            }}
+            autoFocus={searchOpen}
+          />
+          <button className="search-submit">
+            <Search size={18} />
+          </button>
+          <button
+            className="search-close"
+            onClick={() => setSearchOpen(false)}
+          >
+            <X size={22} />
+          </button>
+        </div>
+
+        {/* <div className="search-trending">
+          <span>SEARCH TRENDING :</span>
+          <a href="#">Plant</a>
+          <a href="#">Sofa</a>
+          <a href="#">Basket</a>
+          <a href="#">Chair</a>
+        </div> */}
+      </div>
+
       <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
         <div className="header-inner">
           <div className="header-logo">
@@ -45,14 +96,14 @@ export default function Header() {
 
                 <div className="mega-menu">
                   <div className="mega-menu-2">
-                  <div className="grid-icons">
-                    {categories.map((cat, i) => (
-                      <Link key={i} href={cat.link} className="mega-card">
-                        <img src={cat.icon} alt={cat.label} />
-                        <span>{cat.label}</span>
-                      </Link>
-                    ))}
-                  </div>
+                    <div className="grid-icons">
+                      {categories.map((cat, i) => (
+                        <Link key={i} href={cat.link} className="mega-card">
+                          <img src={cat.icon} alt={cat.label} />
+                          <span>{cat.label}</span>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </li>
@@ -65,7 +116,12 @@ export default function Header() {
           </nav>
 
           <div className="header-actions">
-            <button className="icon-btn"><Search size={22} /></button>
+            <button
+              className="icon-btn"
+              onClick={() => setSearchOpen(true)}
+            >
+              <Search size={22} />
+            </button>
             <button className="icon-btn"><User size={22} /></button>
             <button className="icon-btn"><Heart size={22} /></button>
             <button className="icon-btn cart-btn">

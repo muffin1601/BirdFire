@@ -11,7 +11,7 @@ import styles from './ProductsFilterBar.module.css'
 export default function ProductsFilterBar() {
   return (
     <section className={styles.wrapper}>
-      {/* TOP LINE */}
+      
       <div className={styles.top}>
         <span className={styles.filterLabel}>
           <SlidersHorizontal size={16} />
@@ -19,7 +19,7 @@ export default function ProductsFilterBar() {
         </span>
       </div>
 
-      {/* FILTER ROW */}
+      
       <div className={styles.filters}>
         {['Availability', 'Brand', 'Color', 'More Filters', 'Product Type'].map(
           item => (
@@ -36,7 +36,6 @@ export default function ProductsFilterBar() {
         )}
       </div>
 
-      {/* ACTION ROW */}
       <div className={styles.actions}>
         <button className={styles.clearBtn}>
           <span><Trash2 size={14} />
