@@ -180,3 +180,12 @@ h6 {
   z-index: 2;
   min-height: 200vh;
 }
+
+.page-content-3 {
+  margin-top: 42vh;
+  background: #ffffff;
+  /* border-radius: 40px 40px 0 0; */
+  position: relative;
+  z-index: 2;
+  min-height: 60vh;
+}

@@ -9,7 +9,8 @@ export function useUser() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    supabase.auth.getUser().then(async ({ data }) => {
+    const getUser = async () => {
+      const { data } = await supabase.auth.getUser();
       setUser(data.user);
 
       if (data.user) {
@@ -23,7 +24,17 @@ export function useUser() {
       }
 
       setLoading(false);
+    };
+
+    getUser();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(() => {
+      getUser();
     });
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   return { user, profile, loading };
