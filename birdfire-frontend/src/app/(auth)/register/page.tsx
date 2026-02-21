@@ -29,15 +29,15 @@ export default function RegisterPage() {
       return
     }
 
-    if (data.user) {
-      await supabase.from('profiles').insert({
-        id: data.user.id,
-        email,
-        full_name: `${firstName} ${lastName}`,
-        role: 'customer',
-        is_active: true,
-      })
-    }
+    // if (data.user) {
+    //   await supabase.from("profiles").upsert({
+    //     id: data.user.id,
+    //     email,
+    //     full_name: `${firstName} ${lastName}`,
+    //     role: "customer",
+    //     is_active: true,
+    //   })
+    // }
 
     window.location.href = '/verify-email'
   }
