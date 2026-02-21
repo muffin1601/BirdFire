@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Heart, Eye, ShoppingBag } from 'lucide-react'
 import { useFavorites } from '@/lib/useFavorites'
+import { addToCart } from '@/lib/cart'
 import styles from './CategoryProductsGrid.module.css'
 
 export function ProductCard({ product }: { product: any }) {
@@ -46,6 +47,7 @@ export function ProductCard({ product }: { product: any }) {
             </span>
           )}
 
+          {/* HOVER ICONS */}
           <div className={styles.hoverIcons}>
             <button
               type="button"
@@ -71,10 +73,14 @@ export function ProductCard({ product }: { product: any }) {
             </button>
           </div>
 
+          {/* ADD TO CART */}
           <button
             type="button"
             className={styles.cartBtn}
-            onClick={(e) => e.preventDefault()}
+            onClick={(e) => {
+              e.preventDefault()
+              addToCart(product.id)
+            }}
           >
             <ShoppingBag size={18} />
           </button>
