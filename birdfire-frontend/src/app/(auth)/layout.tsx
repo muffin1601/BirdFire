@@ -13,7 +13,7 @@ export default function AuthLayout({
 
       <TopBanner
         title="Account"
-        backgroundImage="https://www.ethimo.com/assets/images/homepage/2511_lounge_living_d.jpg"
+        backgroundImage="https://www.gandiablasco.com/wp-content/uploads/2025/03/five-luxe-jbr-uae-project-header-2.jpg"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Account" },

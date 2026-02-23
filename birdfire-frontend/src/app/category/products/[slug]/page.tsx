@@ -126,7 +126,7 @@ export default async function CategoryProductsPage({
         ]}
       />
       <div className="page-content-2">
-        <ProductsFilterBar />
+        {/* <ProductsFilterBar /> */}
         <CategoryProductsGrid products={products} />
         <CategoryPillMarquee />
         <FeaturesSection />

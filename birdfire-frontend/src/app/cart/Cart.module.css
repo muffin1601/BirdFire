@@ -1,5 +1,5 @@
 .page {
-  max-width: 1320px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 80px 20px;
   font-family: "DM Sans", sans-serif;
@@ -7,25 +7,28 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 2.3fr 1.2fr;
-  gap: 40px;
+  grid-template-columns: 2.4fr 1fr;
+  gap: 50px;
+  max-width: 85%;
+  margin: 0 auto;
 }
 
 .cart {
-  border: 1px solid #e5e5e5;
+  border: 1px solid #e6e6e6;
+  background: #ffffff;
 }
 
 .head,
 .row {
   display: grid;
-  grid-template-columns: 2.6fr 1fr 1fr 1fr;
+  grid-template-columns: 2.8fr 1fr 1fr 1fr;
   align-items: center;
-  padding: 22px 28px;
+  padding: 34px 32px;
 }
 
 .head {
   background: #f3f3f3;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   color: #555;
   letter-spacing: 0.6px;
@@ -33,22 +36,34 @@
 }
 
 .row {
-  border-top: 1px solid #e5e5e5;
+  min-height: 120px;
+  border-top: 1px solid #ededed;
+}
+
+.row > span {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
 }
 
 .product {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 22px;
 }
 
 .product img {
-  width: 80px;
-  background: #f5f5f5;
+  width: 150px;
+  height: 100px;
+  border: 1px solid #dddddd;
+  background: #f6f6f6;
+  object-fit: cover;
 }
 
 .product span {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #000;
   line-height: 1.4;
@@ -68,24 +83,30 @@
 .qty {
   display: flex;
   align-items: center;
-  border: 1px solid #ddd;
+  justify-content: flex-start;
+  align-self: left;
+  width: 110px;
+  height: 42px;
+  border: 1px solid #e3e3e3;
+  /* margin: 0 auto; */
 }
 
 .qty button {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 42px;
   border: none;
-  color: #000;
-  background: none;
+  background: transparent;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  color: #999;
 }
 
 .qty span {
-  width: 36px;
-  color: #000;
+  width: 38px;
   text-align: center;
   font-size: 14px;
+  font-weight: 600;
+  color: #000;
 }
 
 .actions {
@@ -93,7 +114,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 28px;
   padding: 32px;
-  color: #000;
 }
 
 .checkoutGhost {
@@ -111,15 +131,8 @@
 
 .btnSubmit {
   position: relative;
-  z-index: 10;
   overflow: hidden;
-  width: 100%;
   height: 54px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-family: "DM Sans", sans-serif;
-  text-transform: uppercase;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -128,7 +141,7 @@
 
 .btnSubmit span {
   position: relative;
-  z-index: 5;
+  z-index: 2;
   color: #ffffff;
   font-size: 14px;
   font-weight: 600;
@@ -144,7 +157,6 @@
   border-radius: 50%;
   left: -60%;
   bottom: -180%;
-  z-index: 2;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -157,7 +169,6 @@
   border-radius: 50%;
   left: -60%;
   bottom: -180%;
-  z-index: 1;
   transform: translateY(-130%);
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -171,38 +182,73 @@
 }
 
 .summary {
-  background: #f3f3f3;
-  padding: 30px;
+  background: #f5f5f5;
+  padding: 36px 34px;
 }
 
-.summary h4 {
-  font-size: 12px;
+.itemsCount {
+  font-size: 11px;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.8px;
   color: #555;
-  margin-bottom: 24px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
 }
 
-.totalRow {
+.summaryRow {
   display: flex;
   justify-content: space-between;
-  font-size: 22px;
-  font-weight: 700;
+  align-items: center;
   color: #000;
-  margin-bottom: 16px;
+  font-size: 23px;
+  font-weight: 700;
+  margin-bottom: 14px;
 }
 
-.shipping {
+.summaryRow span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #555;
+}
+
+.summaryRowSmall {
+  display: flex;
+  justify-content: space-between;
   font-size: 13px;
   color: #555;
-  margin-bottom: 18px;
+  margin-bottom: 26px;
 }
 
-.free {
-  font-size: 13px;
-  font-weight: 600;
-  color: #2ecc71;
+.freeShippingBox {
+  background: #ffffff;
+  padding: 18px 18px 20px;
+}
+
+.freeShippingBox p {
+  font-size: 12px;
+  color: #777;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: #e6e6e6;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.progressBar span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #2ab664;
+}
+
+.freeShippingBox small {
+  font-size: 14px;
+  color: #777;
 }
 
 .recommended {
@@ -210,12 +256,14 @@
 }
 
 .recommended h3 {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 24px;
+  max-width: 85%;
+  margin: 0 auto 24px;
 }
 
 .empty {
   text-align: center;
   font-size: 18px;
+  color: #000;
 }

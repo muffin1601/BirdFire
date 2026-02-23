@@ -32,13 +32,10 @@ export default function CartPage() {
           product:products (
             id,
             name,
-            slug,
             price,
             product_images (
-              id,
               image_url,
-              is_primary,
-              sort_order
+              is_primary
             )
           )
         `)
@@ -77,11 +74,11 @@ export default function CartPage() {
         title="Your Shopping Cart"
         breadcrumbs={[
           { label: 'Home', href: '/' },
-          { label: 'Your Shopping Cart' },
+          { label: 'Your Shopping Cart' }
         ]}
-        backgroundImage="https://www.ethimo.com/assets/images/homepage/2511_lounge_living_d.jpg"
+        backgroundImage="https://www.gandiablasco.com/wp-content/uploads/2023/04/lademadera-collection-header.jpg"
       />
-<div className="page-content-2">
+ <div className="page-content-3">
       <div className={styles.page}>
         {items.length === 0 ? (
           <p className={styles.empty}>Your cart is empty.</p>
@@ -106,14 +103,13 @@ export default function CartPage() {
                         className={styles.remove}
                         onClick={() => removeItem(item.id)}
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={20} />
                       </button>
-
                       <img src={image} alt={item.product.name} />
                       <span>{item.product.name}</span>
                     </div>
 
-                    <span>€{item.product.price.toFixed(2)}</span>
+                    <span>₹{item.product.price.toFixed(2)}</span>
 
                     <div className={styles.qty}>
                       <button onClick={() => updateQty(item.id, item.quantity - 1)}>-</button>
@@ -121,9 +117,7 @@ export default function CartPage() {
                       <button onClick={() => updateQty(item.id, item.quantity + 1)}>+</button>
                     </div>
 
-                    <span>
-                      €{(item.product.price * item.quantity).toFixed(2)}
-                    </span>
+                    <span>₹{(item.product.price * item.quantity).toFixed(2)}</span>
                   </div>
                 )
               })}
@@ -140,19 +134,26 @@ export default function CartPage() {
             </div>
 
             <aside className={styles.summary}>
-              <h4>There are {items.length} items in your cart</h4>
-
-              <div className={styles.totalRow}>
-                <span>Total:</span>
-                <strong>€{total.toFixed(2)}</strong>
-              </div>
-
-              <p className={styles.shipping}>
-                Shipping & taxes calculated at checkout
+              <p className={styles.itemsCount}>
+                THERE ARE {items.length} ITEMS IN YOUR CART
               </p>
 
-              <div className={styles.free}>
-                Congratulations! You’ve got free shipping.
+              <div className={styles.summaryRow}>
+                <span>TOTAL:</span>
+                <strong>₹{total.toFixed(2)}</strong>
+              </div>
+
+              <div className={styles.summaryRowSmall}>
+                <span>SHIPPING:</span>
+                <span>Shipping & taxes calculated at checkout</span>
+              </div>
+
+              <div className={styles.freeShippingBox}>
+                <p>CONGRATULATIONS! YOU’VE GOT FREE SHIPPING!</p>
+                <div className={styles.progressBar}>
+                  <span />
+                </div>
+                <small>Free shipping for any orders above ₹1000</small>
               </div>
             </aside>
           </div>

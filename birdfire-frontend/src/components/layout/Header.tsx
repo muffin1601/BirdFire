@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Search, User, Heart, ShoppingBag, X } from "lucide-react"
 import AccountSidebar from "./AccountSidebar"
 import "./Header.css"
+import { supabase } from '@/lib/supabaseClient'
 
 export const categories = [
   { label: "Dining & Bar Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/lamp.svg", link: "/category/products/dining-and-bar-chairs" },
@@ -18,11 +19,50 @@ export const categories = [
   { label: "Accessories", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/shelf.svg", link: "/category/products/accessories" },
 ]
 
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
   const [query, setQuery] = useState("")
+  const [cartCount, setCartCount] = useState(0)
+
+  useEffect(() => {
+    const loadCartCount = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+
+      if (!user) {
+        setCartCount(0)
+        return
+      }
+
+      const { data } = await supabase
+        .from('cart_items')
+        .select('quantity')
+        .eq('user_id', user.id)
+
+      const count =
+        data?.reduce((sum, item) => sum + item.quantity, 0) ?? 0
+
+      setCartCount(count)
+    }
+
+    loadCartCount()
+
+    const channel = supabase
+      .channel('cart-count')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'cart_items' },
+        () => loadCartCount()
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [])
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 120)
@@ -103,12 +143,17 @@ export default function Header() {
             <button className="icon-btn" onClick={() => setAccountOpen(true)}>
               <User size={22} />
             </button>
-            <button className="icon-btn">
+            <button className="icon-btn" onClick={() => window.location.href = '/wishlist'}>
               <Heart size={22} />
             </button>
-            <button className="icon-btn cart-btn">
+            <button
+              className="icon-btn cart-btn"
+              onClick={() => window.location.href = '/cart'}
+            >
               <ShoppingBag size={20} />
-              <span className="cart-count">1</span>
+              {cartCount > 0 && (
+                <span className="cart-count">{cartCount}</span>
+              )}
             </button>
           </div>
         </div>

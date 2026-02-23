@@ -95,8 +95,8 @@ export default function AccountSidebar({ open, onClose }) {
                 <li className={isActive("/wishlist") ? "active" : ""}>
                   <Link href="/wishlist" onClick={onClose}>Wishlist</Link>
                 </li>
-                <li className={isActive("/checkout") ? "active" : ""}>
-                  <Link href="/checkout" onClick={onClose}>Checkout</Link>
+                <li className={isActive("/cart") ? "active" : ""}>
+                  <Link href="/cart" onClick={onClose}>My Cart</Link>
                 </li>
               </>
             )}

@@ -232,11 +232,54 @@
   font-weight: 600;
   cursor: pointer;
   text-transform: uppercase;
+  color: #000;
+  transition:
+    background-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .add:hover {
-  background: #000000;
-  color: #ffffff;
+  background: #000;
+  color: #fff;
+  /* transform: translateY(-2px); */
+  /* box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28); */
+}
+
+.addedMessage {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  color: #000;
+  opacity: 0;
+  animation: pdpAdded 1.6s ease forwards;
+}
+
+@keyframes pdpAdded {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.add:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 .wishlist {
@@ -249,12 +292,23 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: #000;
+  transition:
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .wishlist:hover {
-  background: #e8e8e8;
+  background: #ffffff;
+  /* transform: translateY(-2px); */
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
 }
 
+.wishlist:active {
+  transform: translateY(0);
+  /* box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12); */
+}
 
 .buy {
   margin-top: 14px;

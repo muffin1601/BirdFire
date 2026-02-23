@@ -1,13 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { Heart, Eye, ShoppingBag } from 'lucide-react'
+import { Heart, ShoppingBag, Check } from 'lucide-react'
 import { useFavorites } from '@/lib/useFavorites'
 import { addToCart } from '@/lib/cart'
 import styles from './CategoryProductsGrid.module.css'
+import { useState } from 'react'
 
 export function ProductCard({ product }: { product: any }) {
   const { isFavorite, toggle } = useFavorites(product.id)
+  const [added, setAdded] = useState(false)
 
   const isOnSale =
     product.compare_price !== null &&
@@ -20,6 +22,13 @@ export function ProductCard({ product }: { product: any }) {
     : product.is_featured
     ? 'hot'
     : undefined
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    addToCart(product.id)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 1600)
+  }
 
   return (
     <Link href={`/product/${product.slug}`} className={styles.cardLink}>
@@ -47,7 +56,6 @@ export function ProductCard({ product }: { product: any }) {
             </span>
           )}
 
-          {/* HOVER ICONS */}
           <div className={styles.hoverIcons}>
             <button
               type="button"
@@ -63,27 +71,21 @@ export function ProductCard({ product }: { product: any }) {
                 stroke={isFavorite ? '#ec9d35' : 'currentColor'}
               />
             </button>
-
-            <button
-              type="button"
-              className={styles.iconBtn}
-              onClick={(e) => e.preventDefault()}
-            >
-              <Eye size={18} />
-            </button>
           </div>
 
-          {/* ADD TO CART */}
           <button
             type="button"
-            className={styles.cartBtn}
-            onClick={(e) => {
-              e.preventDefault()
-              addToCart(product.id)
-            }}
+            className={`${styles.cartBtn} ${added ? styles.cartAdded : ''}`}
+            onClick={handleAddToCart}
           >
-            <ShoppingBag size={18} />
+            {added ? <Check size={18} /> : <ShoppingBag size={18} />}
           </button>
+
+          {added && (
+            <div className={styles.addedLabel}>
+              Added to cart
+            </div>
+          )}
         </div>
 
         <div className={styles.stars}>★★★★☆</div>
