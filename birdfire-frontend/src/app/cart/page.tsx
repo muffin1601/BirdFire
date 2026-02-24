@@ -17,6 +17,12 @@ export default function CartPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+  supabase.auth.getSession().then(({ data }) => {
+    console.log('SESSION FROM CLIENT:', data.session)
+  })
+}, [])
+
+  useEffect(() => {
     const loadCart = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
