@@ -12,37 +12,52 @@ const stripePromise = loadStripe(
 
 export default function CheckoutPage() {
   const [clientSecret, setClientSecret] = useState<string | null>(null)
+  const [cartItems, setCartItems] = useState<any[]>([])
 
   useEffect(() => {
-  const loadPaymentIntent = async () => {
-    const {
-      data: { session }
-    } = await supabase.auth.getSession()
+    const loadCheckout = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        window.location.href = '/login'
+        return
+      }
 
-    if (!session) {
-      window.location.href = '/login'
-      return
+      const { data: cart } = await supabase
+        .from('cart_items')
+        .select(`
+          quantity,
+          product:products (
+            name,
+            price,
+            product_images (
+              image_url,
+              is_primary
+            )
+          )
+        `)
+        .eq('user_id', session.user.id)
+
+      setCartItems(cart || [])
+
+      const res = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${session.access_token}`
+        }
+      })
+
+      const data = await res.json()
+      setClientSecret(data.clientSecret)
     }
 
-    const res = await fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${session.access_token}`
-      }
-    })
+    loadCheckout()
+  }, [])
 
-    const data = await res.json()
-    setClientSecret(data.clientSecret)
-  }
-
-  loadPaymentIntent()
-}, [])
-
-  if (!clientSecret) return <p>Loading checkout...</p>
+  if (!clientSecret) return <p>Loading checkout…</p>
 
   return (
     <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <CheckoutForm />
+      <CheckoutForm cartItems={cartItems} />
     </Elements>
   )
 }

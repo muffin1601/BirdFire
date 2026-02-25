@@ -1,0 +1,141 @@
+.container {
+  max-width: 1100px;
+  margin: 60px auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+}
+
+/* LEFT */
+.form {
+  background: #fff;
+  border-radius: 0px;
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.btnSubmit {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  width: 100%;
+  height: 54px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+
+.btnSubmit span {
+  position: relative;
+  z-index: 5;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.btnSubmit::before {
+  content: "";
+  position: absolute;
+  width: 220%;
+  height: 320%;
+  background: #ec9d35;
+  border-radius: 50%;
+  left: -60%;
+  bottom: -180%;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btnSubmit::after {
+  content: "";
+  position: absolute;
+  width: 220%;
+  height: 320%;
+  background: #000000;
+  border-radius: 50%;
+  left: -60%;
+  bottom: -180%;
+  z-index: 1;
+  transform: translateY(-130%);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btnSubmit:hover::before {
+  transform: translateY(-100%);
+}
+
+.btnSubmit:hover::after {
+  transform: translateY(0);
+}
+
+.btnSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* RIGHT */
+.summary {
+  background: #f7f7f7;
+  padding: 24px;
+  border-radius: 0px;
+}
+
+.summaryTitle {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #000;
+  font-weight: 600;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.itemInfo p {
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.itemInfo span {
+  font-size: 12px;
+  
+  color: #666;
+}
+
+.itemPrice {
+  font-size: 14px;
+  color: #000;
+  font-weight: 600;
+}
+
+.total {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  color: #000;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+}
