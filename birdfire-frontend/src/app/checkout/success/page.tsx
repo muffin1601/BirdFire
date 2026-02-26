@@ -6,80 +6,41 @@ import Link from 'next/link'
 import styles from './Success.module.css'
 import confetti from 'canvas-confetti'
 
-type Item = {
-  quantity: number
-  product: {
-    name: string
-    price: number
-    product_images: { image_url: string; is_primary: boolean }[]
-  }
-}
-
 export default function SuccessPage() {
-  const [loading, setLoading] = useState(true)
-  const [items, setItems] = useState<Item[]>([])
+  const [items, setItems] = useState<any[]>([])
   const [orderNumber, setOrderNumber] = useState('')
   const [orderDate, setOrderDate] = useState('')
-  const [invoiceUrl, setInvoiceUrl] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const run = async () => {
       const params = new URLSearchParams(window.location.search)
-      const clientSecret = params.get('payment_intent_client_secret')
+      const secret = params.get('payment_intent_client_secret')
 
-      if (!clientSecret) {
-        setLoading(false)
-        return
-      }
+      if (!secret) return
 
-     
       const res = await fetch('/api/verify-payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clientSecret })
+        body: JSON.stringify({ clientSecret: secret })
       })
 
       const data = await res.json()
 
-      if (data.status !== 'succeeded') {
-        setLoading(false)
-        return
-      }
-
       setOrderNumber(data.orderNumber)
       setOrderDate(data.created)
-      setInvoiceUrl(data.invoiceUrl)
 
-      
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
+      const { data: orderItems } = await supabase
+        .from('order_items')
+        .select('*')
+        .eq('order_id', data.orderId)
 
-      const { data: cart } = await supabase
-        .from('cart_items')
-        .select(`
-          quantity,
-          product:products (
-            name,
-            price,
-            product_images (
-              image_url,
-              is_primary
-            )
-          )
-        `)
-        .eq('user_id', user.id)
+      setItems(orderItems || [])
 
-      setItems((cart as unknown as Item[]) || [])
-
-      
-      await supabase.from('cart_items').delete().eq('user_id', user.id)
-
-     
-      confetti({
-        particleCount: 140,
-        spread: 80,
-        origin: { y: 0.6 }
-      })
+      if (!sessionStorage.getItem('confetti')) {
+        confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 } })
+        sessionStorage.setItem('confetti', '1')
+      }
 
       setLoading(false)
     }
@@ -102,35 +63,24 @@ export default function SuccessPage() {
         </p>
 
         <div className={styles.items}>
-          {items.map((item, i) => {
-            const img =
-              item.product.product_images.find(p => p.is_primary)?.image_url
-
-            return (
-              <div key={i} className={styles.item}>
-                <img src={img} alt={item.product.name} />
-                <div>
-                  <p>{item.product.name}</p>
-                  <span>Qty {item.quantity}</span>
-                </div>
-                <strong>
-                  ₹{(item.product.price * item.quantity).toFixed(2)}
-                </strong>
+          {items.map(item => (
+            <div key={item.id} className={styles.item}>
+              <img src={item.image_url} alt={item.product_name} />
+              <div>
+                <p>{item.product_name}</p>
+                <span>Qty {item.quantity}</span>
               </div>
-            )
-          })}
+              <strong>
+                ₹{(item.price * item.quantity).toFixed(2)}
+              </strong>
+            </div>
+          ))}
         </div>
 
         <div className={styles.actions}>
-          {invoiceUrl && (
-            <a
-              href={invoiceUrl}
-              target="_blank"
-              className={styles.primaryBtn}
-            >
-              <span>Download invoice</span>
-            </a>
-          )}
+          <Link href="/orders" className={styles.primaryBtn}>
+            <span>Track order</span>
+          </Link>
 
           <Link href="/" className={styles.secondaryBtn}>
             Continue shopping
