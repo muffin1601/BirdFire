@@ -46,7 +46,7 @@ export default function ContactSection() {
             <strong>Call Us:</strong> (012)-345-67890
           </p>
 
-          <p>
+          {/* <p>
             <strong>Opening time:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, natus! Libero repellendus illum ipsum, et quo, voluptatem deleniti dolorem soluta autem non est dolores placeat vero perferendis eum alias omnis.,
              <strong>11am to 7pm</strong>
           </p>
@@ -56,7 +56,7 @@ export default function ContactSection() {
             <a><Instagram size={16} /></a>
             <a><Twitter size={16} /></a>
             <a><Music size={16} /></a>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
