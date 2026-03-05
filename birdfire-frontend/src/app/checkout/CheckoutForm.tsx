@@ -62,7 +62,7 @@ export default function CheckoutForm({ cartItems }: { cartItems: any[] }) {
                 <span>Qty {item.quantity}</span>
               </div>
               <strong className={styles.itemPrice}>
-                ${(item.product.price * item.quantity).toFixed(2)}
+                ₹{(item.product.price * item.quantity).toFixed(2)}
               </strong>
             </div>
           )

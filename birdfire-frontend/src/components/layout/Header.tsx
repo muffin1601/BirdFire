@@ -2,23 +2,39 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Search, User, Heart, ShoppingBag, X } from "lucide-react"
+import {
+  Search,
+  User,
+  Heart,
+  ShoppingBag,
+  X,
+  Armchair,
+  Lamp,
+  Table,
+  Sofa,
+  Palmtree,
+  Flame,
+  Gem,
+  Shapes,
+  Package
+} from "lucide-react"
 import AccountSidebar from "./AccountSidebar"
 import "./Header.css"
 import { supabase } from '@/lib/supabaseClient'
 
 export const categories = [
-  { label: "Dining & Bar Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/lamp.svg", link: "/category/products/dining-and-bar-chairs" },
-  { label: "Tables", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/coffee-table.svg", link: "/category/products/tables" },
-  { label: "Lounging", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/potted-plant.svg", link: "/category/products/lounging" },
-  { label: "Lounge Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/armchair_beeb15d0-e4cd-4f7f-a928-00873880baed.svg", link: "/category/products/lounge-chairs" },
-  { label: "Beach Chairs", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/armchair_beeb15d0-e4cd-4f7f-a928-00873880baed.svg", link: "/category/products/beach-chairs" },
-  { label: "Iconics", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/potted-plant.svg", link: "/category/products/iconics" },
-  { label: "Side Tables", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/coffee-table.svg", link: "/category/products/side-tables" },
-  { label: "Lighting Accessories", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/lamp.svg", link: "/category/products/lighting-accessories" },
-  { label: "Accessories", icon: "https://nov-minicom.myshopify.com/cdn/shop/files/shelf.svg", link: "/category/products/accessories" },
+  { label: "Dining & Bar Chairs", icon: Armchair, link: "/category/products/dining-and-bar-chairs" },
+  { label: "Tables", icon: Table, link: "/category/products/tables" },
+  { label: "Lounging", icon: Sofa, link: "/category/products/lounging" },
+  { label: "Lounge Chairs", icon: Armchair, link: "/category/products/lounge-chairs" },
+  { label: "Beach Chairs", icon: Palmtree, link: "/category/products/beach-chairs" },
+  { label: "Iconics", icon: Gem, link: "/category/products/iconics" },
+  { label: "Side Tables", icon: Table, link: "/category/products/side-tables" },
+  { label: "Lighting Accessories", icon: Lamp, link: "/category/products/lighting-accessories" },
+  { label: "Accessories", icon: Package, link: "/category/products/accessories" },
+  { label: "Fireplaces", icon: Flame, link: "/category/products/fireplaces" },
+  { label: "Metal Sculptures", icon: Shapes, link: "/category/products/metal-sculptures" },
 ]
-
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -121,7 +137,7 @@ export default function Header() {
                     <div className="grid-icons">
                       {categories.map((cat, i) => (
                         <Link key={i} href={cat.link} className="mega-card">
-                          <img src={cat.icon} alt={cat.label} />
+                          <cat.icon size={28} strokeWidth={1.5} />
                           <span>{cat.label}</span>
                         </Link>
                       ))}

@@ -34,16 +34,14 @@ export default function ContactSection() {
 
         <div className={styles.info}>
           <p>
-            <strong>Address:</strong> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore non voluptas cupiditate placeat labore accusamus dicta cumque harum perspiciatis iusto culpa natus quasi, voluptates adipisci atque mollitia velit deleniti ipsam!
-          </p>
-          <p>New Delhi, India</p>
+            <strong>Address:</strong> New Delhi, India</p>
 
           <p>
-            <strong>Email:</strong> support@birdfire.com
+            <strong>Email:</strong> info@bird-fireplaces.com
           </p>
 
           <p>
-            <strong>Call Us:</strong> (012)-345-67890
+            <strong>Call Us:</strong> +91 9899999999
           </p>
 
           {/* <p>

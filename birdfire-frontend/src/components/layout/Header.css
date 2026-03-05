@@ -30,6 +30,17 @@
   transition: height 0.3s ease;
 }
 
+.mega-card svg {
+  color: #111;
+  margin-bottom: 8px;
+  transition: transform .25s ease, color .25s ease;
+}
+
+.mega-card:hover svg {
+  transform: translateY(-3px);
+  color: #e08b3b; 
+}
+
 .site-header.scrolled .header-logo img {
   height: 45px;
 }
