@@ -15,7 +15,7 @@ export const revalidate = 0;
 async function getProducts(slug: string) {
   const { data: category } = await supabaseServer
     .from("categories")
-    .select("id, name")
+    .select("id, name, image_url, banner_url")
     .eq("slug", slug)
     .eq("is_active", true)
     .single();
@@ -110,7 +110,7 @@ export default async function CategoryProductsPage({
       <Header />
       <TopBanner
         title={category.name}
-        backgroundImage="https://www.ethimo.com/assets/images/homepage/2511_lounge_living_d.jpg"
+        backgroundImage={category.banner_url || "https://www.ethimo.com/assets/images/homepage/2511_lounge_living_d.jpg"}
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: category.name },

@@ -16,7 +16,7 @@ export const revalidate = 0;
 async function getProducts(slug: string) {
     const { data: collection } = await supabaseServer
         .from("collections")
-        .select("id, name, description")
+        .select("id, name, description, image_url, banner_url")
         .eq("slug", slug)
         .eq("is_active", true)
         .single();
@@ -111,7 +111,7 @@ export default async function CollectionProductsPage({
             <Header />
             <TopBanner
                 title={collection.name}
-                backgroundImage="https://www.gandiablasco.com/wp-content/uploads/2022/12/mass-collection-header-1.jpg"
+                backgroundImage={collection.banner_url ||  "https://www.gandiablasco.com/wp-content/uploads/2022/12/mass-collection-header-1.jpg"}
                 breadcrumbs={[
                     { label: "Home", href: "/" },
                     { label: collection.name },

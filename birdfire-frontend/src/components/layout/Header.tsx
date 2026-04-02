@@ -32,7 +32,10 @@ export const categories = [
   { label: "Side Tables", icon: Table, link: "/category/products/side-tables" },
   { label: "Lighting Accessories", icon: Lamp, link: "/category/products/lighting-accessories" },
   { label: "Accessories", icon: Package, link: "/category/products/accessories" },
-  { label: "Fireplaces", icon: Flame, link: "/category/products/fireplaces" },
+  { label: "Ethanol Fireplaces", icon: Flame, link: "/category/products/ethanol-fireplaces" },
+  { label: "Gas Fireplaces", icon: Flame, link: "/category/products/gas-fireplaces" },
+  { label: "Electric Fireplaces", icon: Flame, link: "/category/products/electric-fireplaces" },
+  { label: "Wood Fireplaces", icon: Flame, link: "/category/products/wood-fireplaces" },
   { label: "Metal Sculptures", icon: Shapes, link: "/category/products/metal-sculptures" },
 ]
 

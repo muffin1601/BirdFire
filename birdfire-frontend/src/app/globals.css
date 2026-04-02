@@ -164,7 +164,7 @@ h6 {
 }
 
 .page-content-2 {
-  margin-top: 42vh;
+  margin-top: 2vh;
   background: #ffffff;
   /* border-radius: 40px 40px 0 0; */
   position: relative;
@@ -173,7 +173,7 @@ h6 {
 }
 
 .page-content {
-  margin-top: 100vh;
+  margin-top:-2vh;
   background: #ffffff;
   /* border-radius: 40px 40px 0 0; */
   position: relative;
