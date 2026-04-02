@@ -1,3 +1,4 @@
+export const revalidate = 0;
 // app/collections/page.tsx
 import Header from "@/components/layout/Header";
 import TopBanner from "@/components/layout/TopBanner";

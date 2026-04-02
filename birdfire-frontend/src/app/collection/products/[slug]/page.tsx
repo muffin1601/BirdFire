@@ -11,16 +11,7 @@ import { supabaseServer } from "@/lib/supabaseServer";
 import CollectionIntro from "@/components/collections/CollectionIntro";
 
 
-export async function generateStaticParams() {
-    const { data } = await supabaseServer
-        .from("collections")
-        .select("slug")
-        .eq("is_active", true);
-
-    return (data ?? []).map((c) => ({
-        slug: c.slug,
-    }));
-}
+export const revalidate = 0;
 
 async function getProducts(slug: string) {
     const { data: collection } = await supabaseServer

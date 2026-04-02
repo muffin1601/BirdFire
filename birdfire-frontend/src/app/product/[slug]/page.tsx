@@ -8,16 +8,7 @@ import ProductsSlider from '@/components/home/ProductsSlider'
 import { supabaseServer } from '@/lib/supabaseServer'
 import ProductAccordion from '@/components/products/ProductAccordion'
 
-export async function generateStaticParams() {
-  const { data: products } = await supabaseServer
-    .from('products')
-    .select('slug')
-    .eq('is_active', true)
-
-  return (products ?? []).map((p) => ({
-    slug: p.slug,
-  }))
-}
+export const revalidate = 0;
 
 
 export default async function Page({

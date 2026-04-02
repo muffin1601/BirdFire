@@ -1,3 +1,4 @@
+export const revalidate = 0;
 import CategoryMarquee from "@/components/home/CategoryMarquee"
 import CategoryPillMarquee from "@/components/home/CategoryPillMarquee"
 import ProductsSlider from "@/components/home/ProductsSlider"
