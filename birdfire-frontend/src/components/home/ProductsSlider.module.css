@@ -3,6 +3,7 @@
 .wrapper {
   padding: 60px 0;
   background: #fff;
+  width: min(100% - 32px, 1500px);
   max-width: 87%;
   margin: 0 auto;
 }
@@ -78,7 +79,8 @@
 .imageWrap {
   background: #ffffff;
   border-radius: 0px;
-  height: 280px;
+  height: auto;
+  aspect-ratio: 1 / 1.08;
   position: relative;
   overflow: hidden;
 
@@ -229,13 +231,30 @@
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
+  .wrapper {
+    width: min(100% - 24px, 760px);
+    max-width: none;
+    padding: 46px 0;
+  }
   .slide {
     flex: 0 0 50%;
   }
 }
 
 @media (max-width: 480px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .slide {
     flex: 0 0 100%;
+  }
+
+  .hoverIcons,
+  .cartBtn {
+    opacity: 1;
+    transform: none;
   }
 }

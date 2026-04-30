@@ -1,4 +1,5 @@
 .container {
+  width: min(100% - 32px, 1100px);
   max-width: 1100px;
   margin: 60px auto;
   display: grid;
@@ -115,6 +116,7 @@
   color: #000;
   font-size: 14px;
   font-weight: 500;
+  overflow-wrap: anywhere;
 }
 
 .itemInfo span {
@@ -138,4 +140,39 @@
   justify-content: space-between;
   font-size: 18px;
   font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    margin: 40px auto;
+  }
+
+  .summary {
+    order: -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    width: min(100% - 24px, 560px);
+    gap: 28px;
+  }
+
+  .summary {
+    padding: 18px;
+  }
+
+  .item {
+    grid-template-columns: 52px 1fr;
+  }
+
+  .item img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .itemPrice {
+    grid-column: 2;
+  }
 }

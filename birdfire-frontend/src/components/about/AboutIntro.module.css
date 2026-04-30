@@ -19,7 +19,7 @@
 
 .title {
   margin-top: 18px;
-  font-size: 36px;
+  font-size: clamp(26px, 4vw, 36px);
   font-weight: 600;
   letter-spacing: 0.02em;
 }
@@ -29,4 +29,11 @@
   font-size: 16px;
   line-height: 1.8;
   color: #555;
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    max-width: 92%;
+    padding: 56px 0 42px;
+  }
 }

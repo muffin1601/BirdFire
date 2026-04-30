@@ -40,7 +40,7 @@
 }
 
 .content h1 {
-  font-size: 42px;
+  font-size: clamp(28px, 4vw, 42px);
   font-weight: 600;
   color: #ffffff;
   letter-spacing: 1px;
@@ -59,4 +59,26 @@
 }
 .breadcrumbs a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 44vh;
+    min-height: 340px;
+  }
+
+  .content {
+    width: min(100% - 32px, 680px);
+  }
+
+  .breadcrumbs {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner {
+    height: 38vh;
+    min-height: 280px;
+  }
 }

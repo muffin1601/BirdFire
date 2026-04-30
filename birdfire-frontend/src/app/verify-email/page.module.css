@@ -58,4 +58,10 @@
 .btnSubmit:hover::after {
   transform: translateY(0);
 }
+
+@media (max-width: 560px) {
+  .btnSubmit {
+    width: 100%;
+  }
+}
  

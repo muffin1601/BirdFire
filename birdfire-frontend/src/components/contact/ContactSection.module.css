@@ -1,4 +1,5 @@
 .wrapper {
+  width: min(100% - 32px, 1500px);
   max-width: 85%;
   margin: 0 auto;
   padding: 120px 0;
@@ -7,7 +8,7 @@
 .grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  gap: 90px;
+  gap: clamp(44px, 6vw, 90px);
   align-items: flex-start;
 }
 
@@ -91,6 +92,11 @@
 /* RESPONSIVE */
 
 @media (max-width: 1024px) {
+  .wrapper {
+    max-width: 92%;
+    padding: 80px 0;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 70px;
@@ -98,6 +104,22 @@
 
   .row {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .wrapper {
+    width: min(100% - 24px, 560px);
+    max-width: none;
+    padding: 56px 0;
+  }
+
+  .form {
+    margin-top: 28px;
+  }
+
+  .btnSubmit {
+    width: 100%;
   }
 }
 

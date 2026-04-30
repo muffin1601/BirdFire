@@ -1,4 +1,5 @@
 .wrapper {
+  width: min(100% - 32px, 1500px);
   max-width: 85%;
   margin: 0 auto;
   padding-top: 0px;
@@ -10,4 +11,15 @@
   height: 420px;
   border: none;
   border-radius: 0px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: min(100% - 24px, 760px);
+    max-width: none;
+  }
+
+  .map {
+    height: 320px;
+  }
 }

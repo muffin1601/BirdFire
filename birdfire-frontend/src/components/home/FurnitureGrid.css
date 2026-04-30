@@ -4,6 +4,7 @@
 }
 
 .grid {
+  width: min(100% - 32px, 1500px);
   max-width: 87%;
   margin: auto;
   display: flex;
@@ -33,7 +34,7 @@
 .card {
   position: relative;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 8px;
   background: #f5f5f5;
 }
 
@@ -85,7 +86,7 @@
 }
 
 .card-title {
-  font-size: 26px;
+  font-size: clamp(20px, 2.4vw, 26px);
   font-weight: 600;
   line-height: 1.2;
   color: #111;
@@ -158,4 +159,49 @@
 
 .card:hover .card-arrow::after {
   transform: translateY(0);
+}
+
+@media (max-width: 992px) {
+  .grid {
+    flex-direction: column;
+  }
+  .left-col, .right-col {
+    width: 100%;
+    flex: none;
+  }
+  .small-row {
+    flex-direction: column;
+  }
+  .card-small {
+    height: 300px;
+    flex: none;
+  }
+  .card-tall {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    max-width: 92%;
+  }
+  .card-content {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    width: min(100% - 24px, 560px);
+    max-width: none;
+  }
+  .card-title {
+    font-size: 20px;
+  }
+  .card-small {
+    height: 250px;
+  }
+  .card-tall {
+    height: 300px;
+  }
 }

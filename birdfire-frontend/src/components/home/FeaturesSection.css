@@ -6,12 +6,13 @@
 }
 
 .features-grid {
+  width: min(100% - 32px, 1500px);
   max-width: 85%;
   margin: 0 auto;
 border-bottom: 1px solid #e0e0e0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 80px;
+  gap: clamp(32px, 5vw, 80px);
   padding-bottom: 50px;
 }
 
@@ -83,6 +84,8 @@ border-bottom: 1px solid #e0e0e0;
 
 @media (max-width: 520px) {
   .features-grid {
+    width: min(100% - 24px, 560px);
+    max-width: none;
     grid-template-columns: 1fr;
     gap: 36px;
   }

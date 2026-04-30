@@ -8,6 +8,7 @@ import {
   Heart,
   ShoppingBag,
   X,
+  Menu,
   Armchair,
   Lamp,
   Table,
@@ -43,6 +44,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [cartCount, setCartCount] = useState(0)
 
@@ -90,12 +93,35 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = searchOpen || accountOpen ? "hidden" : ""
-  }, [searchOpen, accountOpen])
+    document.body.style.overflow = searchOpen || accountOpen || mobileNavOpen ? "hidden" : ""
+  }, [searchOpen, accountOpen, mobileNavOpen])
+
+  useEffect(() => {
+    if (!mobileNavOpen) return
+
+    const onResize = () => {
+      if (window.innerWidth > 900) {
+        setMobileNavOpen(false)
+        setMobileProductsOpen(false)
+      }
+    }
+
+    window.addEventListener("resize", onResize)
+    return () => window.removeEventListener("resize", onResize)
+  }, [mobileNavOpen])
 
   return (
     <>
       {searchOpen && <div className="search-backdrop" onClick={() => setSearchOpen(false)} />}
+      {mobileNavOpen && (
+        <div
+          className="mobile-nav-backdrop"
+          onClick={() => {
+            setMobileNavOpen(false)
+            setMobileProductsOpen(false)
+          }}
+        />
+      )}
 
       <div className={`search-overlay ${searchOpen ? "open" : ""}`}>
         <div className="search-bar">
@@ -129,12 +155,27 @@ export default function Header() {
             </Link>
           </div>
 
-          <nav className="header-nav">
+          <nav
+            className={`header-nav ${mobileNavOpen ? "open" : ""}`}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest("a")) {
+                setMobileNavOpen(false)
+                setMobileProductsOpen(false)
+              }
+            }}
+          >
             <ul>
               <li><Link href="/">Home</Link></li>
 
-              <li className="nav-item has-mega">
-                <Link href="#">Products <span className="nav-arrow" /></Link>
+              <li className={`nav-item has-mega ${mobileProductsOpen ? "open" : ""}`}>
+                <button
+                  type="button"
+                  className="products-toggle"
+                  aria-expanded={mobileProductsOpen}
+                  onClick={() => setMobileProductsOpen((open) => !open)}
+                >
+                  Products <span className="nav-arrow" />
+                </button>
                 <div className="mega-menu">
                   <div className="mega-menu-2">
                     <div className="grid-icons">
@@ -153,6 +194,48 @@ export default function Header() {
               <li><Link href="/about">About</Link></li>
               <li><Link href="/contact">Contact</Link></li>
             </ul>
+
+            <div className="mobile-menu-actions">
+              <button
+                type="button"
+                className="mobile-action"
+                onClick={() => {
+                  setMobileNavOpen(false)
+                  setSearchOpen(true)
+                }}
+              >
+                <Search size={18} />
+                <span>Search</span>
+              </button>
+              <button
+                type="button"
+                className="mobile-action"
+                onClick={() => {
+                  setMobileNavOpen(false)
+                  setAccountOpen(true)
+                }}
+              >
+                <User size={18} />
+                <span>Account</span>
+              </button>
+              <button
+                type="button"
+                className="mobile-action"
+                onClick={() => window.location.href = '/wishlist'}
+              >
+                <Heart size={18} />
+                <span>Wishlist</span>
+              </button>
+              <button
+                type="button"
+                className="mobile-action"
+                onClick={() => window.location.href = '/cart'}
+              >
+                <ShoppingBag size={18} />
+                <span>Cart</span>
+                {cartCount > 0 && <span className="mobile-cart-count">{cartCount}</span>}
+              </button>
+            </div>
           </nav>
 
           <div className="header-actions">
@@ -173,6 +256,19 @@ export default function Header() {
               {cartCount > 0 && (
                 <span className="cart-count">{cartCount}</span>
               )}
+            </button>
+            <button
+              className="icon-btn menu-btn"
+              aria-label="Open menu"
+              aria-expanded={mobileNavOpen}
+              onClick={() => {
+                setMobileNavOpen((open) => {
+                  if (open) setMobileProductsOpen(false)
+                  return !open
+                })
+              }}
+            >
+              {mobileNavOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>

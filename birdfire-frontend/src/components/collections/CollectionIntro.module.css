@@ -14,7 +14,7 @@
 }
 
 .description {
-  font-size: 15px;
+  font-size: clamp(14px, 1.6vw, 15px);
   line-height: 1.8;
   text-align: center;
   color: #555;
@@ -82,6 +82,7 @@
 
 @media (max-width: 768px) {
   .wrapper {
+    max-width: 92%;
     padding: 50px 0 30px;
   }
 

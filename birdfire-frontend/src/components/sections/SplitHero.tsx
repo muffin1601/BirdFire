@@ -36,6 +36,7 @@ const data = [
 
 export default function SplitHero() {
   const [active, setActive] = useState(1);
+  const [isStacked, setIsStacked] = useState(false);
 
   //  stable refs
   const panelsRef = useRef<HTMLDivElement[]>([]);
@@ -50,10 +51,23 @@ export default function SplitHero() {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    const syncLayout = () => setIsStacked(window.innerWidth <= 480);
+    syncLayout();
+    window.addEventListener("resize", syncLayout);
+
+    return () => window.removeEventListener("resize", syncLayout);
+  }, []);
+
   /* Accordion animation */
   useEffect(() => {
     panelsRef.current.forEach((el, i) => {
       if (!el) return;
+
+      if (isStacked) {
+        gsap.set(el, { clearProps: "flex" });
+        return;
+      }
 
       gsap.to(el, {
         flex: i === active ? 3 : 1,
@@ -61,7 +75,7 @@ export default function SplitHero() {
         ease: "power3.out",
       });
     });
-  }, [active]);
+  }, [active, isStacked]);
 
   /* Swipe support */
   const onPointerDown = (e: React.PointerEvent) => {

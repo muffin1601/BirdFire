@@ -1,5 +1,5 @@
 .marqueeSection {
-  width: 85%;
+  width: min(85%, 1500px);
   margin: 0 auto;
   padding: 40px 0 80px;
   background: #ffffff;
@@ -226,4 +226,34 @@
 .arrowButton:hover svg,
 .categoryCard:hover .arrowButton svg {
   transform: rotate(0deg) translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .marqueeSection {
+    width: min(100% - 24px, 760px);
+    padding: 30px 0 60px;
+  }
+  .sectionTitle {
+    font-size: 18px;
+  }
+  .categoryCard {
+    min-width: 220px;
+  }
+  .cardFooter {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+  .arrowButton {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 16px;
+  }
+  .categoryCard {
+    min-width: 180px;
+  }
 }

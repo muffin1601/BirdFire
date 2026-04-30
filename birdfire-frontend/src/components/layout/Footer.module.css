@@ -9,6 +9,7 @@
   display: grid;
   grid-template-columns: 1.1fr 1.9fr;
   min-height: 420px;
+  width: min(100% - 32px, 1680px);
   max-width: 90%;
   margin: 0 auto;
 }
@@ -82,7 +83,7 @@
 
 /* RIGHT */
 .right {
-  padding: 80px 80px 60px;
+  padding: clamp(44px, 5vw, 80px) clamp(28px, 5vw, 80px) 60px;
 }
 
 /* NEWSLETTER */
@@ -125,8 +126,8 @@
 /* LINKS */
 .links {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 80px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 80px);
   margin-top: 60px;
 }
 
@@ -146,11 +147,12 @@
 /* BOTTOM */
 .bottom {
   border-top: 1px solid #222;
-  padding: 24px 60px;
+  padding: 24px clamp(0px, 4vw, 60px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
+  width: min(100% - 32px, 1680px);
   max-width: 90%;
   margin: 0 auto;
 }
@@ -220,11 +222,38 @@
   }
 }
 @media (max-width: 500px) {
+  .top,
+  .bottom {
+    width: min(100% - 24px, 560px);
+    max-width: none;
+  }
+
+  .left,
+  .right {
+    padding: 42px 22px;
+  }
+
   .subscribe {
     flex-direction: column;
   }
 
   .subscribe input {
     margin-bottom: 12px;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .payments img {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+
+  .scrollTop {
+    right: 16px;
+    bottom: 16px;
   }
 }

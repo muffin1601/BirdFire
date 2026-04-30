@@ -172,3 +172,38 @@
   justify-content: center;
   font-size: 16px;
 }
+
+@media (max-width: 620px) {
+  .wrapper {
+    padding: 36px 16px;
+  }
+
+  .card {
+    padding: 26px 18px;
+    border-radius: 8px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .item {
+    grid-template-columns: 64px 1fr;
+    align-items: flex-start;
+  }
+
+  .item img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .item strong {
+    grid-column: 2;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -26,7 +26,7 @@
 .video-hero__content {
   max-width: 100%;
   width: 100%;
-  padding: 90px 80px;
+  padding: clamp(52px, 7vw, 90px) clamp(20px, 6vw, 80px);
   color: #ffffff;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .hero-title {
-  font-size: 5.6rem;
+  font-size: clamp(3rem, 6vw, 5.6rem);
   font-weight: 700;
   line-height: 1.05;
   margin: 0;
@@ -69,3 +69,25 @@
   margin-top: 36px;
 }
 
+@media (max-width: 992px) {
+}
+
+@media (max-width: 768px) {
+  .hero-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .video-hero__content {
+    padding: 60px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-hero__content {
+    padding: 40px 20px;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+  }
+}

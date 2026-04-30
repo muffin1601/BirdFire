@@ -10,7 +10,7 @@
 }
 
 .title {
-  font-size: 30px;
+  font-size: clamp(24px, 3.2vw, 30px);
   font-weight: 600;
 }
 
@@ -70,5 +70,19 @@
   .timeline {
     grid-template-columns: 1fr;
     gap: 60px;
+  }
+}
+
+@media (max-width: 560px) {
+  .wrapper {
+    padding: 56px 0;
+  }
+
+  .inner {
+    max-width: calc(100% - 24px);
+  }
+
+  .intro {
+    margin-bottom: 54px;
   }
 }

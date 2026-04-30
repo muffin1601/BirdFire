@@ -138,3 +138,13 @@
 .switch a:hover {
   text-decoration:  underline;
 }
+
+@media (max-width: 560px) {
+  .page {
+    padding: 56px 16px 80px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+}

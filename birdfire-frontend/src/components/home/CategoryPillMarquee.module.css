@@ -1,5 +1,5 @@
 .wrapper {
-  width: 85%;
+  width: min(85%, 1500px);
   padding: 60px 0;
   background: #ffffff;
   overflow: hidden;
@@ -96,4 +96,19 @@
 
 .text {
   line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: min(100% - 24px, 760px);
+    padding: 40px 0;
+  }
+  .pill {
+    padding: 6px 30px 6px 8px;
+    font-size: 11px;
+  }
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
 }

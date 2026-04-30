@@ -85,3 +85,27 @@
   white-space: nowrap;
   color: #000;
 }
+
+@media (max-width: 560px) {
+  .page {
+    padding: 56px 16px 80px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .item {
+    grid-template-columns: 72px 1fr;
+    align-items: flex-start;
+  }
+
+  .item img {
+    width: 72px;
+    height: 72px;
+  }
+
+  .item strong {
+    grid-column: 2;
+  }
+}
