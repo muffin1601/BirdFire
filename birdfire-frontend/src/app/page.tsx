@@ -14,8 +14,6 @@ import SplitHero from "@/components/sections/SplitHero"
 
 
 export default function HomePage() {
-  
-
   return (
     <>
      <Header />

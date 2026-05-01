@@ -20,6 +20,8 @@ import {
   Package
 } from "lucide-react"
 import AccountSidebar from "./AccountSidebar"
+import { useAuth } from "@/contexts/AuthContext"
+import { useCart } from "@/contexts/CartContext"
 import "./Header.css"
 import { supabase } from '@/lib/supabaseClient'
 
@@ -41,6 +43,10 @@ export const categories = [
 ]
 
 export default function Header() {
+  const { user } = useAuth()
+  const userId = user?.id
+  const { cart } = useCart()
+  
   const [scrolled, setScrolled] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
@@ -50,40 +56,52 @@ export default function Header() {
   const [cartCount, setCartCount] = useState(0)
 
   useEffect(() => {
+    let isMounted = true
+
     const loadCartCount = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      if (userId) {
+        // User is logged in - load from Supabase
+        const { data, error } = await supabase
+          .from('cart_items')
+          .select('quantity')
+          .eq('user_id', userId)
 
-      if (!user) {
-        setCartCount(0)
-        return
+        if (error) {
+          console.error('Cart count error:', error)
+          return
+        }
+
+        const count = data?.reduce((sum, item) => sum + item.quantity, 0) ?? 0
+        if (isMounted) setCartCount(count)
+      } else {
+        // Guest user - get count from context
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0)
+        setCartCount(count)
       }
-
-      const { data } = await supabase
-        .from('cart_items')
-        .select('quantity')
-        .eq('user_id', user.id)
-
-      const count =
-        data?.reduce((sum, item) => sum + item.quantity, 0) ?? 0
-
-      setCartCount(count)
     }
 
     loadCartCount()
 
-    const channel = supabase
-      .channel('cart-count')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'cart_items' },
-        () => loadCartCount()
-      )
-      .subscribe()
+    if (userId) {
+      const channel = supabase
+        .channel(`cart-count-${userId}`)
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'cart_items', filter: `user_id=eq.${userId}` },
+          () => loadCartCount()
+        )
+        .subscribe()
+
+      return () => {
+        isMounted = false
+        supabase.removeChannel(channel)
+      }
+    }
 
     return () => {
-      supabase.removeChannel(channel)
+      isMounted = false
     }
-  }, [])
+  }, [userId, cart])
 
 
   useEffect(() => {

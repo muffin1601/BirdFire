@@ -4,47 +4,28 @@ import { X } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { supabase } from "@/lib/supabaseClient"
+import { useAuth } from "@/contexts/AuthContext"
+import { useUser } from "@/lib/useUser"
+import { useRouter } from "next/navigation"
 import "./AccountSidebar.css"
 
 export default function AccountSidebar({ open, onClose }) {
   const pathname = usePathname()
-  const [user, setUser] = useState(null)
-  const [profile, setProfile] = useState(null)
+  const router = useRouter()
+  const { signOut } = useAuth()
+  const { user, profile, loading } = useUser()
 
   const isActive = (href) => pathname === href
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser()
-      setUser(data.user)
-
-      if (data.user) {
-        const { data: profileData } = await supabase
-          .from("profiles")
-          .select("full_name")
-          .eq("id", data.user.id)
-          .single()
-
-        setProfile(profileData)
-      }
+  const handleLogout = async () => {
+    try {
+      await signOut()
+      onClose()
+      router.push("/")
+    } catch (error) {
+      console.error("Logout error:", error)
+      alert("Failed to logout")
     }
-
-    getUser()
-
-    const { data: listener } = supabase.auth.onAuthStateChange(() => {
-      getUser()
-    })
-
-    return () => {
-      listener.subscription.unsubscribe()
-    }
-  }, [])
-
-  const logout = async () => {
-    await supabase.auth.signOut()
-    onClose()
-    window.location.href = "/login"
   }
 
   return (
@@ -66,14 +47,21 @@ export default function AccountSidebar({ open, onClose }) {
         {user && (
           <div className="account-user">
             <span>WELCOME</span>
-            <strong>{profile?.full_name || "Customer"}</strong>
+            <strong>
+              {profile?.full_name || 
+               user.user_metadata?.full_name || 
+               user.user_metadata?.name || 
+               user.user_metadata?.display_name ||
+               user.email?.split('@')[0] || 
+               "Customer"}
+            </strong>
           </div>
         )}
 
         <div className="account-section">
           <h4>CUSTOMER ACCOUNT</h4>
           <ul>
-            {!user && (
+            {!user && !loading && (
               <>
                 <li className={isActive("/login") ? "active" : ""}>
                   <Link href="/login" onClick={onClose}>Login</Link>
@@ -131,7 +119,7 @@ export default function AccountSidebar({ open, onClose }) {
         </div> */}
 
         {user && (
-          <button className="btnSubmit account-logout" onClick={logout}>
+          <button className="btnSubmit account-logout" onClick={handleLogout}>
             <span>LOGOUT</span>
           </button>
         )}

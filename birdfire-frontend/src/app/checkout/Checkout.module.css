@@ -1,10 +1,227 @@
 .container {
   width: min(100% - 32px, 1100px);
   max-width: 1100px;
-  margin: 60px auto;
+  margin: 80px auto;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 40px;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* LOADING & ERROR STATES */
+.loadingMessage {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+.errorContainer {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  padding: 48px;
+  border: 1px solid #e6e6e6;
+  border-radius: 0;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.errorContainer h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #000;
+}
+
+.errorMessage {
+  color: #c23b34;
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.errorAlert {
+  background: #fff5f5;
+  border-left: 4px solid #c23b34;
+  color: #c23b34;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 0;
+  font-size: 13px;
+}
+
+.authPromptContainer {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  padding: 58px 54px;
+  border: 1px solid #e6e6e6;
+  border-radius: 0;
+  text-align: center;
+  max-width: 620px;
+  margin: 40px auto 70px;
+  position: relative;
+}
+
+.authPromptContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: #ec9d35;
+}
+
+.authPromptContainer h2 {
+  margin-bottom: 14px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.authPromptContainer p {
+  margin: 0 auto 34px;
+  color: #666;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+.authPrompt {
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  border-radius: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.authPrompt p {
+  margin: 0 0 12px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.btnAuthPrompt {
+  background: #ec9d35;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btnAuthPrompt:hover {
+  background: #d48a28;
+}
+
+.btnPrimary {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  height: 54px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  text-transform: uppercase;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 0;
+  text-decoration: none;
+}
+
+.btnPrimary::before {
+  content: "";
+  position: absolute;
+  width: 220%;
+  height: 320%;
+  background: #ec9d35;
+  border-radius: 50%;
+  left: -60%;
+  bottom: -180%;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btnPrimary::after {
+  content: "";
+  position: absolute;
+  width: 220%;
+  height: 320%;
+  background: #000000;
+  border-radius: 50%;
+  left: -60%;
+  bottom: -180%;
+  z-index: 1;
+  transform: translateY(-130%);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btnPrimary span {
+  position: relative;
+  z-index: 5;
+  color: #ffffff;
+}
+
+.btnPrimary:hover::before {
+  transform: translateY(-100%);
+}
+
+.btnPrimary:hover::after {
+  transform: translateY(0);
+}
+
+.btnSecondary {
+  background: #000;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btnSecondary:hover {
+  background: #444;
+}
+
+.guestText {
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.guestText a {
+  color: #ec9d35;
+  text-decoration: none;
+}
+
+.guestText a:hover {
+  text-decoration: underline;
 }
 
 /* LEFT */
@@ -17,6 +234,30 @@
   margin-bottom: 20px;
   font-size: 22px;
   font-weight: 600;
+}
+
+.authNote {
+  margin-top: 12px;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .btnSubmit {
@@ -86,7 +327,8 @@
 .summary {
   background: #f7f7f7;
   padding: 24px;
-  border-radius: 0px;
+  border-radius: 0;
+  border: 1px solid #e6e6e6;
 }
 
 .summaryTitle {
@@ -94,6 +336,13 @@
   font-size: 18px;
   color: #000;
   font-weight: 600;
+}
+
+.emptyCart {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-size: 14px;
 }
 
 .item {
@@ -108,7 +357,8 @@
   width: 60px;
   height: 60px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 0;
+  border: 1px solid #dedede;
 }
 
 .itemInfo p {
@@ -147,6 +397,7 @@
     grid-template-columns: 1fr;
     margin: 40px auto;
   }
+
 
   .summary {
     order: -1;

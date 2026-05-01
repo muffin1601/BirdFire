@@ -1,29 +1,31 @@
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '@/lib/supabaseClient'
+import { useAuth } from '@/contexts/AuthContext'
+import { toUserMessage } from '@/lib/auth'
 import styles from './ForgotPassword.module.css'
 
 export default function ForgotPasswordPage() {
+  const { resetPasswordForEmail } = useAuth()
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
     setMessage('')
+    setLoading(true)
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    })
-
-    if (error) {
-      setError('Something went wrong. Please try again.')
-      return
+    try {
+      await resetPasswordForEmail(email)
+      setMessage('If an account exists, a reset email has been sent.')
+    } catch (err) {
+      setError(toUserMessage(err, 'Something went wrong. Please try again.'))
+    } finally {
+      setLoading(false)
     }
-
-    setMessage('If an account exists, a reset email has been sent.')
   }
 
   return (
@@ -34,8 +36,8 @@ export default function ForgotPasswordPage() {
           We will send you an email to reset your password.
         </p>
 
-        {error && <p className={styles.error}>• {error}</p>}
-        {message && <p className={styles.success}>• {message}</p>}
+        {error && <p className={styles.error}>{error}</p>}
+        {message && <p className={styles.success}>{message}</p>}
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
@@ -47,8 +49,8 @@ export default function ForgotPasswordPage() {
             required
           />
 
-          <button className={styles.btnSubmit}>
-            <span>SUBMIT</span>
+          <button className={styles.btnSubmit} disabled={loading}>
+            <span>{loading ? 'SENDING...' : 'SUBMIT'}</span>
           </button>
 
           <p className={styles.switch}>

@@ -1,5 +1,6 @@
 import "./globals.css"
 import type { Metadata } from "next";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "BirdFire Furniture | Modern Furniture for Outdoor Living",
@@ -16,7 +17,7 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
+        <html lang="en" data-scroll-behavior="smooth">
             <head>
                 <link
                     rel="stylesheet"
@@ -29,7 +30,9 @@ export default function RootLayout({
 
             </head>
             <body>
-                {children}
+                <Providers>
+                    {children}
+                </Providers>
             </body>
         </html>
     )

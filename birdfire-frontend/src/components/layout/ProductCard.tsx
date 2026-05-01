@@ -3,17 +3,37 @@
 import Link from 'next/link'
 import { Heart, ShoppingBag, Check } from 'lucide-react'
 import { useFavorites } from '@/lib/useFavorites'
-import { addToCart } from '@/lib/cart'
+import { useCart } from '@/lib/useCart'
 import styles from './CategoryProductsGrid.module.css'
 import { useState } from 'react'
 
-export function ProductCard({ product }: { product: any }) {
+interface ProductCardProduct {
+  id: string
+  slug: string
+  name: string
+  price: number
+  compare_price: number | null
+  is_new?: boolean
+  is_featured?: boolean
+  primary_image?: {
+    image_url: string
+    alt_text?: string | null
+  } | null
+  secondary_image?: {
+    image_url: string
+    alt_text?: string | null
+  } | null
+}
+
+export function ProductCard({ product }: { product: ProductCardProduct }) {
   const { isFavorite, toggle } = useFavorites(product.id)
+  const { addToCart } = useCart()
   const [added, setAdded] = useState(false)
 
+  const comparePrice = product.compare_price
   const isOnSale =
-    product.compare_price !== null &&
-    product.compare_price > product.price
+    typeof comparePrice === 'number' &&
+    comparePrice > product.price
 
   const badge = product.is_new
     ? 'new'
@@ -23,9 +43,9 @@ export function ProductCard({ product }: { product: any }) {
     ? 'hot'
     : undefined
 
-  const handleAddToCart = (e: React.MouseEvent) => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault()
-    addToCart(product.id)
+    await addToCart(product.id)
     setAdded(true)
     setTimeout(() => setAdded(false), 1600)
   }
@@ -94,7 +114,7 @@ export function ProductCard({ product }: { product: any }) {
         <div className={styles.priceWrap}>
           {isOnSale && (
             <span className={styles.comparePrice}>
-              ₹{product.compare_price.toLocaleString()}
+              ₹{comparePrice.toLocaleString()}
             </span>
           )}
           <span className={styles.price}>

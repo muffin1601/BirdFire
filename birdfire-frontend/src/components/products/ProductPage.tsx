@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import {
   ChevronLeft,
   ChevronRight,
@@ -9,7 +10,7 @@ import {
   Plus,
   Check
 } from 'lucide-react'
-import { addToCart } from '@/lib/cart'
+import { useCart } from '@/lib/useCart'
 import { useFavorites } from '@/lib/useFavorites'
 import styles from './ProductPage.module.css'
 
@@ -28,6 +29,7 @@ interface Product {
   stock: number
   rating_average: number | null
   rating_count: number | null
+  brands: { name: string } | { name: string }[] | null
   product_images: ProductImage[]
 }
 
@@ -51,10 +53,15 @@ export default function ProductPage({ product }: Props) {
   const tags = ['Premium', 'Outdoor', 'Designer']
 
   const { isFavorite, toggle } = useFavorites(product.id)
+  const { addToCart } = useCart()
 
   const rating = Math.round(product.rating_average ?? 0)
   const reviewCount = product.rating_count ?? 0
   const inStock = product.stock > 0
+
+  const brandName = Array.isArray(product.brands) 
+    ? product.brands[0]?.name 
+    : product.brands?.name;
 
   const increaseQty = () => {
     if (qty < product.stock) setQty(qty + 1)
@@ -64,9 +71,9 @@ export default function ProductPage({ product }: Props) {
     if (qty > 1) setQty(qty - 1)
   }
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!inStock) return
-    addToCart(product.id, qty)
+    await addToCart(product.id, qty)
     setAdded(true)
     setTimeout(() => setAdded(false), 1600)
   }
@@ -82,7 +89,7 @@ export default function ProductPage({ product }: Props) {
       <div className={styles.wrapper}>
         <div className={styles.gallery}>
           <div className={styles.breadcrumbs}>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
             <span>/</span>
             <span>{product.name}</span>
           </div>
@@ -93,6 +100,7 @@ export default function ProductPage({ product }: Props) {
                 <img
                   key={img}
                   src={img}
+                  alt={product.name}
                   onClick={() => setActiveImage(img)}
                   className={activeImage === img ? styles.activeThumb : ''}
                 />
@@ -155,6 +163,13 @@ export default function ProductPage({ product }: Props) {
             {product.short_description ||
               'Premium outdoor furniture designed for modern living.'}
           </p>
+
+          {brandName && (
+            <div className={styles.brandContainer}>
+              <span className={styles.brandLabel}>Brand :</span>
+              <span className={styles.brandName}>{brandName}</span>
+            </div>
+          )}
 
           <div className={styles.stock}>
             {inStock ? (

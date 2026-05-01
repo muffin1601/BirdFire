@@ -10,15 +10,15 @@ import ProductAccordion from '@/components/products/ProductAccordion'
 
 export const revalidate = 0;
 
-
 export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-// console.log('[Product Page] slug:', slug)
-  const { data: product } = await supabaseServer
+  
+  // Try fetching with brands relationship
+  let { data: product, error } = await supabaseServer
     .from('products')
     .select(`
       id,
@@ -37,22 +37,56 @@ export default async function Page({
         image_url,
         is_primary,
         sort_order
+      ),
+      brands (
+        name
       )
     `)
     .eq('slug', slug)
     .eq('is_active', true)
-    .single()
+    .single() as any;
 
-//   console.log('[Product Page] product:', product)
-// console.log('[Product Page] error:', Error)
+  // Fallback if brand relationship fails
+  if (error && error.message.includes('relationship')) {
+    console.warn('[Product Page] Brand relationship missing, falling back...');
+    const { data: fallbackData, error: fallbackError } = await supabaseServer
+      .from('products')
+      .select(`
+        id,
+        name,
+        slug,
+        short_description,
+        description,
+        price,
+        compare_price,
+        stock,
+        availability_status,
+        rating_average,
+        rating_count,
+        product_images (
+          id,
+          image_url,
+          is_primary,
+          sort_order
+        )
+      `)
+      .eq('slug', slug)
+      .eq('is_active', true)
+      .single() as any;
+      
+    product = fallbackData;
+    if (fallbackError) console.error('[Product Page] Fallback error:', fallbackError);
+  } else if (error) {
+    console.error('[Product Page] Query error:', error);
+  }
 
   if (!product) return notFound()
 
   return (
     <>
       <Header />
-      <ProductPage product={product} />
-      <ProductAccordion  />
+      <ProductPage product={product as any} />
+      <ProductAccordion />
       <CategoryPillMarquee />
       <FeaturesSection />
       <ProductsSlider />

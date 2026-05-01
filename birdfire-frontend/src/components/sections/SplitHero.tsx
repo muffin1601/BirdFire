@@ -32,8 +32,6 @@ const data = [
   },
 ];
 
-
-
 export default function SplitHero() {
   const [active, setActive] = useState(1);
   const [isStacked, setIsStacked] = useState(false);

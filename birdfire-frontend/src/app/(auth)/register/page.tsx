@@ -1,11 +1,19 @@
 'use client'
 
-import { supabase } from '@/lib/supabaseClient'
+import { useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+import { toUserMessage } from '@/lib/auth'
 import styles from './Register.module.css'
 
 export default function RegisterPage() {
+  const { signUpWithEmail } = useAuth()
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
   async function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    setError('')
+    setLoading(true)
 
     const form = e.currentTarget
     const firstName = (form.first_name as HTMLInputElement).value
@@ -13,33 +21,13 @@ export default function RegisterPage() {
     const email = (form.email as HTMLInputElement).value
     const password = (form.password as HTMLInputElement).value
 
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${window.location.origin}/callback`,
-        data: {
-          full_name: `${firstName} ${lastName}`,
-        },
-      },
-    })
-
-    if (error) {
-      alert(error.message)
-      return
+    try {
+      const result = await signUpWithEmail(email, password, `${firstName} ${lastName}`.trim())
+      window.location.href = result.needsEmailVerification ? '/verify-email' : '/'
+    } catch (err) {
+      setError(toUserMessage(err, 'Registration failed. Please try again.'))
+      setLoading(false)
     }
-
-    // if (data.user) {
-    //   await supabase.from("profiles").upsert({
-    //     id: data.user.id,
-    //     email,
-    //     full_name: `${firstName} ${lastName}`,
-    //     role: "customer",
-    //     is_active: true,
-    //   })
-    // }
-
-    window.location.href = '/verify-email'
   }
 
   return (
@@ -83,8 +71,10 @@ export default function RegisterPage() {
             <span>Sign up for our newsletter</span>
           </label>
 
-          <button className={styles.btnSubmit}>
-            <span>REGISTER</span>
+          {error && <p className={styles.error}>{error}</p>}
+
+          <button className={styles.btnSubmit} disabled={loading}>
+            <span>{loading ? 'REGISTERING...' : 'REGISTER'}</span>
           </button>
 
           <p className={styles.switch}>

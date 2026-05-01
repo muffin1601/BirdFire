@@ -30,6 +30,7 @@
   height: 52px;
   padding: 0 18px;
   border: 1px solid #e5e5e5;
+  border-radius: 0;
   margin-bottom: 22px;
   font-family: 'DM Sans';
   font-size: 13px;
@@ -146,5 +147,131 @@
 
   .title {
     font-size: 22px;
+  }
+}
+
+.methodBtn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+  color: #000;
+  margin-bottom: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.methodBtn:hover:not(:disabled) {
+  background: #efefef;
+  border-color: #d0d0d0;
+}
+
+.methodBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.googleIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.methodIcon {
+  flex: 0 0 auto;
+  color: #ec9d35;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  margin: -18px 0 12px 0;
+  padding: 0;
+}
+
+.success {
+  color: #166534;
+  font-size: 13px;
+  margin: -18px 0 12px 0;
+  padding: 0;
+}
+
+.switchText {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: #ec9d35;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.link:hover {
+  color: #d68a2e;
+}
+
+.backBtn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #000;
+  transition: all 0.2s;
+  margin-top: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.backBtn:hover {
+  background: #efefef;
+  border-color: #d0d0d0;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

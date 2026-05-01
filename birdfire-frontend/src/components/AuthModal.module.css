@@ -1,0 +1,297 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.68);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(1px);
+}
+
+.modal {
+  background: white;
+  border: 1px solid #e6e6e6;
+  border-radius: 0;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.28);
+  width: 100%;
+  max-width: 470px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 46px 34px 40px;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.closeBtn:hover {
+  color: #000;
+}
+
+.container {
+  width: 100%;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #000;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-size: 14px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: none;
+}
+
+.passwordWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrap .input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.eyeBtn:hover {
+  color: #000;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  margin: -12px 0 0 0;
+  padding: 0;
+}
+
+.success {
+  color: #166534;
+  font-size: 13px;
+  margin: -12px 0 0 0;
+  padding: 0;
+}
+
+.methodBtn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+.methodBtn:hover:not(:disabled) {
+  background: #ffffff;
+  border-color: #ec9d35;
+}
+
+.methodBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+.methodIcon {
+  flex: 0 0 auto;
+  color: #ec9d35;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #ec9d35;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.switchText {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: #ec9d35;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: 13px;
+}
+
+.link:hover {
+  color: #000;
+}
+
+.backBtn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #000;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.backBtn:hover {
+  background: #ffffff;
+  border-color: #ec9d35;
+}
+
+@media (max-width: 480px) {
+  .modal {
+    max-width: 100%;
+    margin: 20px;
+    padding: 30px 20px;
+    border-radius: 0;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+}
