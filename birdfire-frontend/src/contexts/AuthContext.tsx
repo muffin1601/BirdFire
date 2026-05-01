@@ -20,9 +20,9 @@ interface AuthContextType {
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<void>;
-  signUpWithEmail: (email: string, password: string, fullName?: string) => Promise<{ needsEmailVerification: boolean }>;
+  signUpWithEmail: (email: string, password: string, fullName?: string, phone?: string) => Promise<{ needsEmailVerification: boolean }>;
   signInWithPhone: (phone: string, password: string) => Promise<void>;
-  signUpWithPhone: (phone: string, password: string, fullName?: string) => Promise<void>;
+  signUpWithPhone: (phone: string, password: string, fullName?: string) => Promise<{ session: Session | null }>;
   sendPhoneOtp: (phone: string) => Promise<void>;
   verifyPhoneOtp: (phone: string, token: string) => Promise<void>;
   resetPasswordForEmail: (email: string) => Promise<void>;
