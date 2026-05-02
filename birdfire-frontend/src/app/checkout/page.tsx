@@ -103,8 +103,14 @@ export default function CheckoutPage() {
         })
 
         if (!res.ok) {
-          const errorData = await res.json()
-          throw new Error(errorData.message || 'Failed to create payment intent')
+          let errorMessage = 'Failed to create payment intent';
+          try {
+            const errorData = await res.json();
+            errorMessage = errorData.error || errorData.message || errorMessage;
+          } catch (e) {
+            errorMessage = `Payment gateway error (${res.status}). Please try again later.`;
+          }
+          throw new Error(errorMessage);
         }
 
         const data = await res.json()
