@@ -39,7 +39,8 @@ export default async function Page({
         sort_order
       ),
       brands (
-        name
+        name,
+        logo_url
       )
     `)
     .eq('slug', slug)

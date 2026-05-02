@@ -29,7 +29,7 @@ interface Product {
   stock: number
   rating_average: number | null
   rating_count: number | null
-  brands: { name: string } | { name: string }[] | null
+  brands: { name: string; logo_url?: string | null } | { name: string; logo_url?: string | null }[] | null
   product_images: ProductImage[]
 }
 
@@ -59,9 +59,12 @@ export default function ProductPage({ product }: Props) {
   const reviewCount = product.rating_count ?? 0
   const inStock = product.stock > 0
 
-  const brandName = Array.isArray(product.brands) 
-    ? product.brands[0]?.name 
-    : product.brands?.name;
+  const brandData = Array.isArray(product.brands) 
+    ? product.brands[0] 
+    : product.brands;
+
+  const brandName = brandData?.name;
+  const brandLogo = brandData?.logo_url;
 
   const increaseQty = () => {
     if (qty < product.stock) setQty(qty + 1)
@@ -147,7 +150,12 @@ export default function ProductPage({ product }: Props) {
         </div>
 
         <div className={styles.details}>
-          <h1 className={styles.title}>{product.name}</h1>
+          <h1 className={styles.title}>
+            {brandLogo && (
+              <img src={brandLogo} alt={brandName} className={styles.titleLogo} />
+            )}
+            {product.name}
+          </h1>
 
           <div className={styles.rating}>
             {'★'.repeat(rating)}
@@ -164,12 +172,7 @@ export default function ProductPage({ product }: Props) {
               'Premium outdoor furniture designed for modern living.'}
           </p>
 
-          {brandName && (
-            <div className={styles.brandContainer}>
-              <span className={styles.brandLabel}>Brand :</span>
-              <span className={styles.brandName}>{brandName}</span>
-            </div>
-          )}
+
 
           <div className={styles.stock}>
             {inStock ? (
