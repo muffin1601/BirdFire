@@ -152,17 +152,17 @@
   align-items: center;
   gap: 5px;
   margin-bottom: 4px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .brandLabel {
-  font-weight: 600;
+  font-weight: 500;
   color: #333;
 }
 
 .brandName {
-  color: #666;
-  font-weight: 400;
+  color: #292929;
+  font-weight: 800;
 }
 
 .stock {
