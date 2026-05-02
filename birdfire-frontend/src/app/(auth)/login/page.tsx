@@ -7,7 +7,7 @@ import styles from './Login.module.css';
 import { Eye, EyeOff, Loader, Mail, Phone } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-type AuthMode = 'method-select' | 'email-login' | 'email-signup' | 'phone-login' | 'phone-signup' | 'phone-verify';
+type AuthMode = 'method-select' | 'email-login' | 'email-signup';
 
 function LoginPageContent() {
   const router = useRouter();
@@ -16,8 +16,6 @@ function LoginPageContent() {
     signInWithGoogle, 
     signInWithEmail, 
     signUpWithEmail, 
-    signInWithPhone,
-    signUpWithPhone,
   } = useAuth();
   const [mode, setMode] = useState<AuthMode>('method-select');
   const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +25,6 @@ function LoginPageContent() {
     password: '', 
     confirmPassword: '', 
     fullName: '',
-    otp: '' 
   });
   const [error, setError] = useState(searchParams.get('error') ? 'Sign in could not be completed. Please try again.' : '');
   const [message, setMessage] = useState('');
@@ -97,53 +94,6 @@ function LoginPageContent() {
     }
   };
 
-  const handlePhoneLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.phone || !formData.password) {
-      setError('Please enter your phone number and password');
-      return;
-    }
-
-    const phoneRegex = /^[0-9]{10,}$/;
-    if (!phoneRegex.test(formData.phone.replace(/\D/g, ''))) {
-      setError('Please enter a valid phone number');
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      setError('');
-      await signInWithPhone(formData.phone, formData.password);
-      router.push(nextPath);
-    } catch (err: unknown) {
-      setError(toUserMessage(err, 'Phone login failed'));
-      setIsLoading(false);
-    }
-  };
-
-  const handlePhoneSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.phone || !formData.password || !formData.confirmPassword) {
-      setError('Please fill in all fields');
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      setError('');
-      await signUpWithPhone(formData.phone, formData.password);
-      router.push(nextPath);
-    } catch (err: unknown) {
-      setError(toUserMessage(err, 'Phone signup failed'));
-      setIsLoading(false);
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -177,19 +127,11 @@ function LoginPageContent() {
               <Mail className={styles.methodIcon} size={18} aria-hidden="true" />
               Login with Email
             </button>
-            <button className={styles.methodBtn} onClick={() => setMode('phone-login')}>
-              <Phone className={styles.methodIcon} size={18} aria-hidden="true" />
-              Login with Phone
-            </button>
 
             <p className={styles.switchText}>
               Don&apos;t have an account?{' '}
               <button className={styles.link} onClick={() => setMode('email-signup')}>
                 Sign up with Email
-              </button>
-              {' or '}
-              <button className={styles.link} onClick={() => setMode('phone-signup')}>
-                Phone
               </button>
             </p>
           </>
@@ -322,119 +264,6 @@ function LoginPageContent() {
             <p className={styles.switch}>
               Already have an account?{' '}
               <button className={styles.link} onClick={() => setMode('email-login')}>
-                Login Here
-              </button>
-            </p>
-
-            <button className={styles.backBtn} onClick={() => setMode('method-select')}>
-              &lt;- Back to Login Options
-            </button>
-          </>
-        )}
-
-        {mode === 'phone-login' && (
-          <>
-            <h1 className={styles.title}>LOGIN WITH PHONE</h1>
-            <p className={styles.subtitle}>Enter your phone and password</p>
-
-            <form onSubmit={handlePhoneLogin} className={styles.form}>
-              <input
-                className={styles.input}
-                name="phone"
-                type="tel"
-                placeholder="PHONE NUMBER (10+ digits)"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-              />
-
-              <div className={styles.passwordWrap}>
-                <input
-                  className={styles.input}
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="PASSWORD"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                />
-                <button
-                  type="button"
-                  className={styles.eye}
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-
-              {error && <p className={styles.error}>{error}</p>}
-
-              <button className={styles.btnSubmit} disabled={isLoading}>
-                {isLoading ? <Loader size={18} className={styles.spinner} /> : <span>LOGIN</span>}
-              </button>
-            </form>
-
-            <button className={styles.backBtn} onClick={() => setMode('method-select')}>
-              &lt;- Back to Login Options
-            </button>
-          </>
-        )}
-
-        {mode === 'phone-signup' && (
-          <>
-            <h1 className={styles.title}>CREATE ACCOUNT</h1>
-            <p className={styles.subtitle}>Sign up with phone number</p>
-
-            <form onSubmit={handlePhoneSignup} className={styles.form}>
-              <input
-                className={styles.input}
-                name="phone"
-                type="tel"
-                placeholder="PHONE NUMBER"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-              />
-
-              <div className={styles.passwordWrap}>
-                <input
-                  className={styles.input}
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="PASSWORD (min 6 chars)"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                />
-                <button
-                  type="button"
-                  className={styles.eye}
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-
-              <input
-                className={styles.input}
-                name="confirmPassword"
-                type="password"
-                placeholder="CONFIRM PASSWORD"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                required
-              />
-
-              {error && <p className={styles.error}>{error}</p>}
-
-              <button className={styles.btnSubmit} disabled={isLoading}>
-                {isLoading ? <Loader size={18} className={styles.spinner} /> : <span>SIGN UP</span>}
-              </button>
-            </form>
-
-            <p className={styles.switch}>
-              Already have an account?{' '}
-              <button className={styles.link} onClick={() => setMode('phone-login')}>
                 Login Here
               </button>
             </p>

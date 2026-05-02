@@ -13,14 +13,14 @@ interface AuthModalProps {
   onAuthSuccess?: () => void;
 }
 
-type AuthMode = 'method-select' | 'email-login' | 'email-signup' | 'phone-login' | 'phone-verify' | 'google';
+type AuthMode = 'method-select' | 'email-login' | 'email-signup' | 'google';
 
 export default function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
-  const { signInWithGoogle, signInWithEmail, signUpWithEmail, sendPhoneOtp, verifyPhoneOtp, syncCartAfterLogin, syncFavoritesAfterLogin } = useAuth();
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail, syncCartAfterLogin, syncFavoritesAfterLogin } = useAuth();
   const { getLocalCart, getLocalFavorites, clearCart, clearFavorites } = useCart();
   const [mode, setMode] = useState<AuthMode>('method-select');
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ email: '', phone: '', password: '', confirmPassword: '', otp: '' });
+  const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalP
 
   const handleClose = () => {
     setMode('method-select');
-    setFormData({ email: '', phone: '', password: '', confirmPassword: '', otp: '' });
+    setFormData({ email: '', password: '', confirmPassword: '' });
     setError('');
     setMessage('');
     onClose();
@@ -124,54 +124,6 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalP
     }
   };
 
-  const handlePhoneLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.phone) {
-      setError('Please enter your phone number');
-      return;
-    }
-
-    // Validate phone format (basic validation)
-    const phoneRegex = /^[0-9]{10,}$/;
-    if (!phoneRegex.test(formData.phone.replace(/\D/g, ''))) {
-      setError('Please enter a valid phone number');
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      setError('');
-      await sendPhoneOtp(formData.phone);
-      setMessage('We sent a verification code to your phone.');
-      setMode('phone-verify');
-    } catch (err: unknown) {
-      setError(toUserMessage(err, 'Phone login failed'));
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleVerifyPhone = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.phone || !formData.otp) {
-      setError('Please enter the verification code');
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      setError('');
-      await verifyPhoneOtp(formData.phone, formData.otp);
-      await syncGuestData();
-      handleClose();
-      onAuthSuccess?.();
-    } catch (err: unknown) {
-      setError(toUserMessage(err, 'Phone verification failed'));
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -209,19 +161,11 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalP
               <Mail className={styles.methodIcon} size={18} aria-hidden="true" />
               Login with Email
             </button>
-            <button className={styles.methodBtn} onClick={() => setMode('phone-login')}>
-              <Phone className={styles.methodIcon} size={18} aria-hidden="true" />
-              Login with Phone OTP
-            </button>
 
             <p className={styles.switchText}>
               Don&apos;t have an account?{' '}
               <button className={styles.link} onClick={() => setMode('email-signup')}>
                 Sign up with Email
-              </button>
-              {' or '}
-              <button className={styles.link} onClick={() => setMode('phone-login')}>
-                Phone
               </button>
             </p>
           </div>
@@ -323,64 +267,6 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalP
 
               <button type="submit" className={styles.submitBtn} disabled={isLoading}>
                 {isLoading ? <Loader size={18} className={styles.spinner} /> : 'Sign Up'}
-              </button>
-            </form>
-
-            <button className={styles.backBtn} onClick={() => setMode('method-select')}>
-              &lt;- Back
-            </button>
-          </div>
-        )}
-
-        {mode === 'phone-login' && (
-          <div className={styles.container}>
-            <h1 className={styles.title}>Login with Phone</h1>
-            <form onSubmit={handlePhoneLogin} className={styles.form}>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number (10+ digits)"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className={styles.input}
-                required
-              />
-
-              {error && <p className={styles.error}>{error}</p>}
-
-              <button type="submit" className={styles.submitBtn} disabled={isLoading}>
-                {isLoading ? <Loader size={18} className={styles.spinner} /> : 'Send Code'}
-              </button>
-            </form>
-
-            <button className={styles.backBtn} onClick={() => setMode('method-select')}>
-              &lt;- Back
-            </button>
-          </div>
-        )}
-
-        {mode === 'phone-verify' && (
-          <div className={styles.container}>
-            <h1 className={styles.title}>Verify Phone</h1>
-            <p className={styles.subtitle}>Enter the code sent to {formData.phone}</p>
-            <form onSubmit={handleVerifyPhone} className={styles.form}>
-              <input
-                type="text"
-                inputMode="numeric"
-                autoComplete="one-time-code"
-                name="otp"
-                placeholder="Verification Code"
-                value={formData.otp}
-                onChange={handleInputChange}
-                className={styles.input}
-                required
-              />
-
-              {message && <p className={styles.success}>{message}</p>}
-              {error && <p className={styles.error}>{error}</p>}
-
-              <button type="submit" className={styles.submitBtn} disabled={isLoading}>
-                {isLoading ? <Loader size={18} className={styles.spinner} /> : 'Verify'}
               </button>
             </form>
 

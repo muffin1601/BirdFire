@@ -21,10 +21,6 @@ interface AuthContextType {
   signInWithGoogle: () => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<void>;
   signUpWithEmail: (email: string, password: string, fullName?: string, phone?: string) => Promise<{ needsEmailVerification: boolean }>;
-  signInWithPhone: (phone: string, password: string) => Promise<void>;
-  signUpWithPhone: (phone: string, password: string, fullName?: string) => Promise<{ session: Session | null }>;
-  sendPhoneOtp: (phone: string) => Promise<void>;
-  verifyPhoneOtp: (phone: string, token: string) => Promise<void>;
   resetPasswordForEmail: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
   ensureUserProfile: (profileUser?: User | null) => Promise<void>;
@@ -73,10 +69,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const extractedPhone = 
       targetUser.user_metadata?.phone_number || 
-      targetUser.phone || 
-      (targetUser.email?.endsWith('@phone-auth.com') ? targetUser.email.split('@')[0] : null);
+      targetUser.phone;
 
-    const displayEmail = targetUser.email?.endsWith('@phone-auth.com') ? null : targetUser.email;
+    const displayEmail = targetUser.email;
 
     // First, check if profile exists to preserve the role
     const { data: existingProfile } = await supabase
@@ -207,90 +202,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signInWithPhone = async (phone: string, password: string) => {
-    try {
-      setLoading(true);
-      const cleanPhone = phone.replace(/\D/g, '');
-      const shadowEmail = `${cleanPhone}@phone-auth.com`;
-      
-      const { error } = await supabase.auth.signInWithPassword({
-        email: shadowEmail,
-        password,
-      });
-
-      if (error) throw error;
-    } catch (error) {
-      console.error('Phone sign in error:', error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const signUpWithPhone = async (phone: string, password: string, fullName = '') => {
-    try {
-      setLoading(true);
-      const cleanPhone = phone.replace(/\D/g, '');
-      const shadowEmail = `${cleanPhone}@phone-auth.com`;
-      
-      const { data, error } = await supabase.auth.signUp({
-        email: shadowEmail,
-        password,
-        options: {
-          data: {
-            full_name: fullName,
-            phone_number: phone,
-          },
-        },
-      });
-
-      if (error) throw error;
-      return { session: data.session };
-    } catch (error) {
-      console.error('Phone sign up error:', error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const sendPhoneOtp = async (phone: string) => {
-    try {
-      setLoading(true);
-      const { error } = await supabase.auth.signInWithOtp({
-        phone,
-        options: {
-          shouldCreateUser: true,
-        },
-      });
-
-      if (error) throw error;
-    } catch (error) {
-      console.error('Phone OTP error:', error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const verifyPhoneOtp = async (phone: string, token: string) => {
-    try {
-      setLoading(true);
-      const { error } = await supabase.auth.verifyOtp({
-        phone,
-        token,
-        type: 'sms',
-      });
-
-      if (error) throw error;
-    } catch (error) {
-      console.error('Phone OTP verification error:', error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const resetPasswordForEmail = async (email: string) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: getPasswordResetUrl(),
@@ -399,10 +310,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       signInWithGoogle,
       signInWithEmail,
       signUpWithEmail,
-      signInWithPhone,
-      signUpWithPhone,
-      sendPhoneOtp,
-      verifyPhoneOtp,
       resetPasswordForEmail,
       signOut,
       ensureUserProfile,
