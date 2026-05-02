@@ -105,7 +105,7 @@ export default function CheckoutForm({ cartItems, user }: CheckoutFormProps) {
               Processing…
             </>
           ) : (
-            <span>Pay ${total.toFixed(2)}</span>
+            <span>Pay ₹{total.toFixed(2)}</span>
           )}
         </button>
 
